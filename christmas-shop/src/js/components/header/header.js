@@ -3,7 +3,7 @@ import styles from './header.module.scss';
 
 export class Header extends BaseElement {
   navLinks = [
-    { gifts: '#gifts' },
+    { gifts: './gifts.html' },
     { about: '#about' },
     { best: '#best' },
     { contacts: '#contacts' },
@@ -25,23 +25,23 @@ export class Header extends BaseElement {
     );
     const navigation = new BaseElement('nav', []);
     const navList = new BaseElement('ul', [styles.navList]);
-    const navItem = Array.from(
+    const navLink = Array.from(
       { length: this.navLinks.length },
       (_, idx) =>
         new BaseElement(
-          'li',
-          [styles.navItem],
-          {},
+          'a',
+          [],
+          { href: Object.values(this.navLinks[idx]) },
           Object.keys(this.navLinks[idx]),
         ),
     );
-    navItem.forEach((item, idx) =>
-      item.append(
-        new BaseElement('a', [], {
-          href: Object.values(this.navLinks[idx]),
-        }),
-      ),
+    const navItem = Array.from(
+      { length: this.navLinks.length },
+      (_, idx) => new BaseElement('li', [styles.navItem]),
     );
+
+    navItem.forEach((item, idx) => item.append(navLink[idx]));
+
     logoDivImg.append(logoImg);
     logo.append(logoDivImg, logoText);
     navList.append(...navItem);
