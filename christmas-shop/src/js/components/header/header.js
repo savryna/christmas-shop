@@ -12,7 +12,7 @@ export class Header extends BaseElement {
   constructor() {
     super('header', [styles.header]);
 
-    const logo = new BaseElement('div', [styles.logo]);
+    const logo = new BaseElement('a', [styles.logo], { href: './index.html' });
     const logoDivImg = new BaseElement('div', [styles.logoDivImg]);
     const logoImg = new BaseElement('img', [styles.logoImg], {
       src: 'src/img/svg/snowflake.svg',
@@ -30,7 +30,7 @@ export class Header extends BaseElement {
       (_, idx) =>
         new BaseElement(
           'a',
-          [],
+          [styles.navLink],
           { href: Object.values(this.navLinks[idx]) },
           Object.keys(this.navLinks[idx]),
         ),
