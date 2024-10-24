@@ -1,5 +1,6 @@
 import { BaseElement } from '../../common/baseElem.js';
 import { Header } from '../header/header.js';
+import { Main } from '../main/main.js';
 import styles from './wrapper.module.scss';
 
 export class Root extends BaseElement {
@@ -7,8 +8,8 @@ export class Root extends BaseElement {
     super('div', [styles.wrapper]);
 
     const header = new Header();
-    console.log(header.navItemAmount);
-    this.append(header);
+    const hero = new Main();
+    this.append(header, hero);
   }
 
   init() {

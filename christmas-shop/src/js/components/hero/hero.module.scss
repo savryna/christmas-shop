@@ -1,0 +1,47 @@
+@import '../../../styles/_variables.scss';
+@import '../../../styles/_mixins.scss';
+
+p {
+  margin: 0;
+}
+.hero {
+  background: url('./img/bg-ball.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: $primary;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 120px 507px;
+  text-align: center;
+}
+
+.congratulationTop,
+.congratulationBottom {
+  @include caption;
+  color: $static-white;
+}
+
+.congratulationMiddle {
+  @include header1;
+  color: $static-white;
+}
+
+.heroLink {
+  @include action_small;
+  padding: 20px 32px;
+  color: $static-white;
+  background-color: $dark;
+  border-radius: 20px;
+  transition: all 0.3s ease-in;
+  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+
+  &:hover {
+    background-color: $static-white;
+    color: $dark;
+  }
+}
