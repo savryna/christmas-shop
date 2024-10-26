@@ -5,7 +5,7 @@ export class Header extends BaseElement {
   navLinks = [
     { gifts: './gifts.html' },
     { about: '#about' },
-    { best: '#best' },
+    { best: '#gifts' },
     { contacts: '#contacts' },
   ];
 

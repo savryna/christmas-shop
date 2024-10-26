@@ -119,7 +119,7 @@ export class Footer extends BaseElement {
   ];
 
   constructor() {
-    super('footer', [styles.footer]);
+    super('footer', [styles.footer], { id: 'contacts' });
 
     const contactLinksContainer = new BaseElement('div', [
       styles.contactLinksContainer,

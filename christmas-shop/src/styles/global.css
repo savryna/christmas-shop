@@ -1,5 +1,9 @@
 @import url(../../node_modules/modern-normalize/modern-normalize.css);
 
+html {
+  scroll-behavior: smooth;
+}
+
 button {
   background-color: transparent;
   color: inherit;

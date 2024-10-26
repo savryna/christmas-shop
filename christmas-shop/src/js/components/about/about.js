@@ -3,7 +3,7 @@ import styles from './about.module.scss';
 
 export class About extends BaseElement {
   constructor() {
-    super('section', [styles.aboutSection]);
+    super('section', [styles.aboutSection], { id: 'about' });
 
     const aboutContent = new BaseElement('div', [styles.aboutContent]);
     const aboutDescriptionBlock = new BaseElement('div', [

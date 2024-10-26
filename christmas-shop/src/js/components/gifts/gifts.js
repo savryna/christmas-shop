@@ -29,7 +29,7 @@ export class GiftsElement extends BaseElement {
     },
   ];
   constructor() {
-    super('section', [styles.giftsSection]);
+    super('section', [styles.giftsSection], { id: 'gifts' });
 
     const giftsTitle = new BaseElement(
       'h2',
