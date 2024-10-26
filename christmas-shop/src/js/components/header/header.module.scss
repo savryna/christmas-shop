@@ -15,6 +15,16 @@
   gap: 8.7px;
   align-items: center;
   cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $primary10;
+    border-radius: 12px;
+
+    .logoText {
+      color: $primary;
+    }
+  }
 }
 
 .logoDivImg {
@@ -28,6 +38,7 @@
 
 .logoText {
   @include action_small;
+  transition: all 0.3s ease;
 }
 
 .navList {
