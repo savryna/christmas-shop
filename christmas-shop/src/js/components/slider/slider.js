@@ -3,10 +3,10 @@ import styles from './slider.module.scss';
 
 export class Slider extends BaseElement {
   sliderSrc = [
-    '/img/snowman.png',
-    '/img/christmas-trees.png',
-    '/img/christmas-tree-ball.png',
-    '/img/fairytale-house.png',
+    './img/snowman.png',
+    './img/christmas-trees.png',
+    './img/christmas-tree-ball.png',
+    './img/fairytale-house.png',
   ];
   sliderText = ['live', 'create', 'love', 'dream'];
 

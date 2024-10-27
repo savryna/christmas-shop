@@ -5,7 +5,7 @@ export class GiftCards extends BaseElement {
   tabInner = ['All', 'for work', 'for health', 'for harmony'];
   cardsContent = {
     work: {
-      srcImg: '/img/gift-for-work.png',
+      srcImg: './img/gift-for-work.png',
       tag: 'for work',
       innerText: [
         'Console.log Guru',
@@ -16,7 +16,7 @@ export class GiftCards extends BaseElement {
       styleTag: 'forWork',
     },
     health: {
-      srcImg: '/img/gift-for-health.png',
+      srcImg: './img/gift-for-health.png',
       tag: 'for health',
       innerText: [
         'Step Master',
@@ -28,7 +28,7 @@ export class GiftCards extends BaseElement {
     },
 
     harmony: {
-      srcImg: '/img/gift-for-harmony.png',
+      srcImg: './img/gift-for-harmony.png',
       tag: 'for harmony',
       innerText: [
         'Bug Acceptance Guru',

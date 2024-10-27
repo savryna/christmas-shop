@@ -5,20 +5,20 @@ export class Footer extends BaseElement {
   contacts = [
     {
       href: 'tel:+375 (29) 111-22-33',
-      srcImg: '/img/svg/santa-claus.svg',
+      srcImg: './img/svg/santa-claus.svg',
       contact: '+375 (29) 111-22-33',
       description: 'Call Us',
     },
 
     {
       href: 'https://maps.app.goo.gl/Ls1v5pe5a3h6yfz29',
-      srcImg: '/img/svg/christmas-tree.svg',
+      srcImg: './img/svg/christmas-tree.svg',
       contact: 'Magic forest',
       description: 'meet us',
     },
     {
       href: 'mailto:gifts@magic.com',
-      srcImg: '/img/svg/snake.svg',
+      srcImg: './img/svg/snake.svg',
       contact: 'gifts@magic.com',
       description: 'write us',
     },
