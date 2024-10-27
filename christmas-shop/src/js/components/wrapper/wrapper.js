@@ -26,6 +26,7 @@ export class RootGifts extends BaseElement {
     super('div', [styles.wrapper]);
 
     const header = new Header();
+    header.activeClassNav(0);
     const main = new Main2Page();
     const footer = new Footer();
 

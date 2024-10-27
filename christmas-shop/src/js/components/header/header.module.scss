@@ -60,6 +60,13 @@
     cursor: url('../../../img/svg/pointinghand.svg'), pointer;
     padding: 12px 20.4px;
     transition: all 0.3s ease;
+
+    &.active {
+      color: variables.$primary;
+      background-color: variables.$primary10;
+      border-radius: 12px;
+      cursor: default;
+    }
   }
 
   &:hover {

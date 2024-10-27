@@ -35,6 +35,7 @@ export class Header extends BaseElement {
           Object.keys(this.navLinks[idx]),
         ),
     );
+    this.navLink = navLink;
     const navItem = Array.from(
       { length: this.navLinks.length },
       (_, idx) => new BaseElement('li', [styles.navItem]),
@@ -47,5 +48,9 @@ export class Header extends BaseElement {
     navList.append(...navItem);
     navigation.append(navList);
     this.append(logo, navigation);
+  }
+
+  activeClassNav(idx) {
+    this.navLink[idx].addClasses([styles.active]);
   }
 }
