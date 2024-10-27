@@ -4,8 +4,11 @@
 .ctaSection {
   padding: 60px 0;
   background: url('../../../img/bg-snow.png'), url('../../../img/bg-forest.png');
-  background-size: contain;
+  // background-size: contain;
+  // background-repeat: no-repeat;
+  background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .ctaContent {
@@ -33,7 +36,7 @@
 
 .timerBlock {
   margin-top: -12px;
-  padding: 9px 12px;
+  padding: 8px 12px 12px;
   display: flex;
   background-color: variables.$static-white-40;
   border-radius: 20px;
