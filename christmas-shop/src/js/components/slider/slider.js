@@ -9,15 +9,21 @@ export class Slider extends BaseElement {
     './img/fairytale-house.png',
   ];
   sliderText = ['live', 'create', 'love', 'dream'];
+  sliderAlts = [
+    'snowman image',
+    'christmas trees image',
+    'christmas tree ball image',
+    'fairytale house image',
+  ];
 
   constructor() {
     super('section', [styles.sliderSection]);
 
     const gratitude = new BaseElement(
-      'p',
+      'h2',
       [styles.gratitude],
       {},
-      'Become Happier!<br><p>in the new 2025</p>',
+      'Become Happier!<br><span>in the new 2025</span>',
     );
 
     const sliderContainer = new BaseElement('div', [styles.sliderContainer]);
@@ -28,6 +34,7 @@ export class Slider extends BaseElement {
       (_, idx) =>
         new BaseElement('img', [styles.sliderImgs], {
           src: this.sliderSrc[idx],
+          alt: this.sliderAlts[idx],
         }),
     );
 

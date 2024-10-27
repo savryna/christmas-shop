@@ -12,7 +12,7 @@ export class Hero extends BaseElement {
       'Merry Christmas',
     );
     const congratulationMiddle = new BaseElement(
-      'p',
+      'h2',
       [styles.congratulationMiddle],
       {},
       'Gift yourself <br> the&nbsp;magic&nbsp;of&nbsp;new  possibilities',

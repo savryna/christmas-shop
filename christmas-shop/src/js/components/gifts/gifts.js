@@ -54,6 +54,7 @@ export class GiftsElement extends BaseElement {
       (_, idx) =>
         new BaseElement('img', [styles.cardImg], {
           src: this.cardsContent[idx].src,
+          alt: `${this.cardsContent[idx].tag} gift image`,
         }),
     );
 
@@ -66,7 +67,7 @@ export class GiftsElement extends BaseElement {
       { length: this.cardsContent.length },
       (_, idx) =>
         new BaseElement(
-          'p',
+          'h3',
           [styles.cardTag, styles[this.cardsContent[idx].tagStyle]],
           {},
           this.cardsContent[idx].tag,

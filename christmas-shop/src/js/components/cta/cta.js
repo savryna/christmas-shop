@@ -29,7 +29,7 @@ export class CTASection extends BaseElement {
       'Explore Magical Gifts',
     );
     const timerText = new BaseElement(
-      'p',
+      'h2',
       [styles.timerText],
       {},
       'The New Year is Coming Soon...',

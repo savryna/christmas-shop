@@ -13,7 +13,7 @@
   color: variables.$static-white;
   margin-bottom: 20px;
 
-  p {
+  span {
     @include mixins.header2;
 
     margin-top: 12px;

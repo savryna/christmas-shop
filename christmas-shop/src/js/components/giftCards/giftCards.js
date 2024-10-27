@@ -59,7 +59,7 @@ export class GiftCards extends BaseElement {
     super('section', [styles.giftCardsSection]);
 
     const title = new BaseElement(
-      'p',
+      'h2',
       [styles.title],
       {},
       'Achieve health,<br> harmony, and<br> inner strength',
@@ -99,7 +99,7 @@ export class GiftCards extends BaseElement {
       { length: this.layoutCardQueue.length },
       (_, idx) =>
         new BaseElement(
-          'p',
+          'h3',
           [styles.cardTag, styles[this.layoutCardQueue[idx].styleTag]],
           {},
           this.layoutCardQueue[idx].tag,

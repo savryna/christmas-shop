@@ -4,10 +4,11 @@ import styles from './footer.module.scss';
 export class Footer extends BaseElement {
   contacts = [
     {
-      href: 'tel:+375 (29) 111-22-33',
+      href: 'tel:+375(29)111-22-33',
       srcImg: './img/svg/santa-claus.svg',
       contact: '+375 (29) 111-22-33',
       description: 'Call Us',
+      alt: 'santa claus image',
     },
 
     {
@@ -15,12 +16,14 @@ export class Footer extends BaseElement {
       srcImg: './img/svg/christmas-tree.svg',
       contact: 'Magic forest',
       description: 'meet us',
+      alt: 'christmas tree image',
     },
     {
       href: 'mailto:gifts@magic.com',
       srcImg: './img/svg/snake.svg',
       contact: 'gifts@magic.com',
       description: 'write us',
+      alt: 'snake christmas tree image',
     },
   ];
   svgElemsCode = [
@@ -137,6 +140,7 @@ export class Footer extends BaseElement {
       (_, idx) =>
         new BaseElement('img', [styles.contactImgs], {
           src: this.contacts[idx].srcImg,
+          alt: this.contacts[idx].alt,
         }),
     );
 
