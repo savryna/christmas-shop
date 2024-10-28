@@ -8,6 +8,7 @@ export default defineConfig({
     minify: false,
     sourcemap: true,
     target: 'esnext',
+    compact: false,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
