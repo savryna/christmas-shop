@@ -19,7 +19,7 @@ export class Header extends BaseElement {
       alt: 'logo icon',
     });
     const logoText = new BaseElement('h1', [styles.logoText], {}, 'the gifts');
-    const navigation = new BaseElement('nav', []);
+    const navigation = new BaseElement('nav', [styles.nav]);
     const navList = new BaseElement('ul', [styles.navList]);
     const navLink = Array.from(
       { length: this.navLinks.length },
@@ -28,7 +28,7 @@ export class Header extends BaseElement {
           'a',
           [styles.navLink],
           { href: Object.values(this.navLinks[idx]) },
-          Object.keys(this.navLinks[idx]),
+          `<span>${Object.keys(this.navLinks[idx])}</span>`,
         ),
     );
     this.navLink = navLink;
@@ -46,7 +46,7 @@ export class Header extends BaseElement {
     this.append(logo, navigation);
   }
 
-  activeClassNav(idx) {
-    this.navLink[idx].addClasses([styles.active]);
+  activeClassNav() {
+    this.navLink[0].addClasses([styles.active]);
   }
 }
