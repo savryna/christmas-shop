@@ -4,7 +4,21 @@
 .aboutSection {
   @include mixins.snowBack;
 
-  padding: 60px 82px;
+  padding: 60px 5.69vw;
+
+  @media screen and (width <= 768px) {
+    & {
+      padding: 60px 1.04vw;
+    }
+  }
+}
+
+.aboutContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  padding: 0 60px;
 }
 
 .aboutContent {
@@ -17,8 +31,14 @@
 }
 
 .aboutDescriptionBlock {
-  padding: 160px 152px 160px 60px;
+  // padding: 160px 152px 160px 60px;
+  padding: 11.1vw 0;
   flex-basis: 50%;
+  max-width: 426px;
+
+  @media screen and (width <= 768px) {
+    padding: 106px 0;
+  }
 }
 
 .descriptionTitle {

@@ -1,5 +1,9 @@
 @import url('../../node_modules/modern-normalize/modern-normalize.css');
 
+* {
+  /* outline: 5px solid black; */
+}
+
 html {
   scroll-behavior: smooth;
 }

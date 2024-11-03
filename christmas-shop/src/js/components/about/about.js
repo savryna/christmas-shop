@@ -5,6 +5,7 @@ export class About extends BaseElement {
   constructor() {
     super('section', [styles.aboutSection], { id: 'about' });
 
+    const aboutContainer = new BaseElement('div', [styles.aboutContainer]);
     const aboutContent = new BaseElement('div', [styles.aboutContent]);
     const aboutDescriptionBlock = new BaseElement('div', [
       styles.aboutDescriptionBlock,
@@ -33,12 +34,13 @@ export class About extends BaseElement {
 
     const aboutImgBlock = new BaseElement('div', [styles.aboutImg]);
 
+    aboutContainer.append(aboutDescriptionBlock);
     aboutDescriptionBlock.append(
       descriptionTitle,
       descriptionCongratulation,
       descriptionText,
     );
-    aboutContent.append(aboutDescriptionBlock, aboutImgBlock);
+    aboutContent.append(aboutContainer, aboutImgBlock);
     this.append(aboutContent);
   }
 }
