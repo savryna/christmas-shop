@@ -17,7 +17,7 @@ export class Hero extends BaseElement {
       'h2',
       [styles.congratulationMiddle],
       {},
-      'Gift yourself <br> the&nbsp;magic&nbsp;of&nbsp;new  possibilities',
+      'Gift yourself the magic of new possibilities',
     );
     const congratulationBottom = new BaseElement(
       'p',
