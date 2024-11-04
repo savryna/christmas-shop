@@ -19,6 +19,12 @@
       padding: 60px 7.8125vw;
     }
   }
+
+  @media screen and (width <= 400px) {
+    & {
+      padding: 60px 4.7125vw;
+    }
+  }
 }
 
 .giftsTitle {
