@@ -10,7 +10,7 @@
 
   @media screen and (width <= 1440px) {
     & {
-      padding: 58px 5.69vw;
+      padding: 60px 5.69vw;
     }
   }
 
@@ -76,14 +76,14 @@
   flex: 1;
   background-color: $static-white;
   border-radius: 20px;
-  padding: 19px 20px;
+  padding: 20px 20px 18px;
   text-align: left;
 }
 
 .cardTag {
   @include header4;
 
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .forWork {

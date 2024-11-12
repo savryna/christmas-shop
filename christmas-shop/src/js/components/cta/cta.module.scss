@@ -18,7 +18,7 @@
   max-width: 426px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
   justify-content: center;
   align-items: center;
   color: variables.$static-white;
@@ -38,7 +38,7 @@
 }
 
 .timerBlock {
-  margin-top: -12px;
+  margin-top: -9px;
   padding: 8px 12px 12px;
   display: flex;
   background-color: variables.$static-white-40;
