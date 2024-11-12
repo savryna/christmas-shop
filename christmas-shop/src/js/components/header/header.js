@@ -4,15 +4,15 @@ import styles from './header.module.scss';
 export class Header extends BaseElement {
   navLinks = [
     { gifts: 'gifts.html' },
-    { about: './index.html#about' },
-    { best: './index.html#gifts' },
+    { about: './home#about' },
+    { best: './home#gifts' },
     { contacts: '#contacts' },
   ];
 
   constructor() {
     super('header', [styles.header]);
 
-    const logo = new BaseElement('a', [styles.logo], { href: './index.html' });
+    const logo = new BaseElement('a', [styles.logo], { href: './home.html' });
     const logoDivImg = new BaseElement('div', [styles.logoDivImg]);
     const logoImg = new BaseElement('img', [styles.logoImg], {
       src: './img/svg/snowflake.svg',
