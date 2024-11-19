@@ -85,11 +85,13 @@
     cursor: default;
   }
 
-  &:hover:not(:disabled) {
-    background-color: variables.$static-white;
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      background-color: variables.$static-white;
 
-    svg path {
-      stroke: variables.$primary;
+      svg path {
+        stroke: variables.$primary;
+      }
     }
   }
 }

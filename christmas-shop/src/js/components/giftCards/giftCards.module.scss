@@ -71,9 +71,14 @@
     cursor: url('../../../img/svg/pointinghand.svg'), pointer;
   }
 
-  &:hover,
   &.active {
     background-color: variables.$static-white-40;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: variables.$static-white-40;
+    }
   }
 }
 
@@ -106,8 +111,10 @@
     transition: all 0.3s ease;
   }
 
-  &:hover .cardInnerText {
-    color: variables.$primary;
+  @media (hover: hover) {
+    &:hover .cardInnerText {
+      color: variables.$primary;
+    }
   }
 }
 

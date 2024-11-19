@@ -62,8 +62,10 @@
     transition: all 0.3s ease;
   }
 
-  &:hover .cardHeader {
-    color: $primary;
+  @media (hover: hover) {
+    &:hover .cardHeader {
+      color: $primary;
+    }
   }
 }
 

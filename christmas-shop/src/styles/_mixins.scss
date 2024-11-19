@@ -115,8 +115,10 @@
   transition: all 0.3s ease-in;
   cursor: url('../../../img/svg/pointinghand.svg'), pointer;
 
-  &:hover {
-    background-color: variables.$static-white;
-    color: variables.$dark;
+  @media (hover: hover) {
+    &:hover {
+      background-color: variables.$static-white;
+      color: variables.$dark;
+    }
   }
 }

@@ -61,10 +61,12 @@
     transition: all 0.3s ease;
   }
 
-  &:hover {
-    .contactsTextLink,
-    .contactDescription {
-      color: variables.$primary;
+  @media (hover: hover) {
+    &:hover {
+      .contactsTextLink,
+      .contactDescription {
+        color: variables.$primary;
+      }
     }
   }
 }
@@ -94,8 +96,10 @@
     transition: all 0.3s ease;
   }
 
-  &:hover svg path {
-    stroke: variables.$primary;
+  @media (hover: hover) {
+    &:hover svg path {
+      stroke: variables.$primary;
+    }
   }
 }
 
@@ -118,7 +122,9 @@
   color: variables.$dark;
   transition: all 0.3s ease;
 
-  &:hover {
-    color: variables.$primary;
+  @media (hover: hover) {
+    &:hover {
+      color: variables.$primary;
+    }
   }
 }
