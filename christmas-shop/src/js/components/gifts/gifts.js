@@ -13,7 +13,7 @@ export class GiftsElement extends BaseElement {
       src: './img/gift-for-health',
       tag: 'for health',
       title: 'Hydration Bot',
-      tagStyle: 'forHealt',
+      tagStyle: 'forHealth',
     },
     {
       src: './img/gift-for-work',

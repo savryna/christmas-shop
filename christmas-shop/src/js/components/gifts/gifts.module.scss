@@ -78,6 +78,7 @@
 .cardImg {
   width: 100%;
   object-fit: contain;
+  aspect-ratio: auto;
 }
 
 .cardText {
@@ -98,7 +99,7 @@
   color: $tag-purple;
 }
 
-.forHealt {
+.forHealth {
   color: $tag-green;
 }
 
