@@ -52,7 +52,7 @@ export class GiftsElement extends BaseElement {
     );
     const cardPictures = Array.from(
       { length: this.cardsContent.length },
-      () => new BaseElement('picture'),
+      () => new BaseElement('picture', [styles.cardPicture]),
     );
     const cardImg = Array.from(
       { length: this.cardsContent.length },

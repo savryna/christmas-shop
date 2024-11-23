@@ -55,8 +55,12 @@
     background-color: variables.$static-white;
     width: 100%;
     height: calc(100dvh - 64px);
-    transform: translateX(999px);
-    transition: all 0.3s ease-in;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in;
+
+    &.open {
+      transform: translateX(0);
+    }
   }
 }
 

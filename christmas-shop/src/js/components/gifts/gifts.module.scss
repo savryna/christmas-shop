@@ -2,16 +2,18 @@
 @use '../../../styles/_variables.scss' as *;
 
 .giftsSection {
+  @include snowBack;
+
   background-position: top, center;
-  padding: 58px 82px;
+  padding: 56px 5.69vw 60px;
   text-align: center;
   color: $static-white;
 
-  @media screen and (width <= 1440px) {
-    & {
-      padding: 60px 5.69vw;
-    }
-  }
+  // @media screen and (width < 1440px) {
+  //   & {
+  //     padding: 60px 5.69vw;
+  //   }
+  // }
 
   @media screen and (width <= 768px) {
     & {
@@ -29,13 +31,13 @@
 .giftsTitle {
   @include caption;
 
-  margin-bottom: 15px;
+  margin-bottom: 12.8px;
 }
 
 .giftsDescription {
   @include header2;
 
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .cards {
@@ -54,7 +56,7 @@
 
 .card {
   max-width: 310px;
-  min-height: 342px;
+  height: 342px;
   border-radius: 20px;
   background-color: $content-bg;
   display: flex;
@@ -73,6 +75,10 @@
       color: $primary;
     }
   }
+}
+
+.cardPicture {
+  height: 229px;
 }
 
 .cardImg {

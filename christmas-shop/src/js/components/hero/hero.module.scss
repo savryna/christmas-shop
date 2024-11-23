@@ -35,6 +35,10 @@ p {
   gap: 12px;
   max-width: 430px;
   text-align: center;
+
+  @media screen and (width <= 460px) {
+    // padding: 0 8px;
+  }
 }
 
 .congratulationTop,
