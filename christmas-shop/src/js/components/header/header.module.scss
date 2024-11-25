@@ -26,7 +26,7 @@
   padding: 8px 20px;
   gap: 8.7px;
   align-items: center;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
   transition: all 0.3s ease;
 
   .logoText {
@@ -88,7 +88,7 @@
   list-style-type: none;
 
   .navLink {
-    cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+    cursor: pointer;
     // padding: 12px 20.4px;
     // transition: all 0.3s ease;
 
@@ -151,7 +151,7 @@
   height: 40px;
   transition: all 0.3s ease;
   position: relative;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
 
   &::after {
     content: '';

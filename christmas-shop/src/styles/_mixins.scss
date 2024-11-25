@@ -128,7 +128,7 @@
   background-color: variables.$dark;
   border-radius: 20px;
   transition: all 0.3s ease-in;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {

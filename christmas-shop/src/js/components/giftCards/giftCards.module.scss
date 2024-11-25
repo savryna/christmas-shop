@@ -58,7 +58,7 @@
 .tabItem {
   padding: 11px 15px;
   border-radius: 12px;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
   transition: all 0.3s ease;
 
   @media screen and (width <= 500px) {
@@ -74,7 +74,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+    cursor: pointer;
   }
 
   &.active {
@@ -109,7 +109,7 @@
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
 
   .cardInnerText {
     @include mixins.header3;

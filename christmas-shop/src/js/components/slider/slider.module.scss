@@ -76,7 +76,7 @@
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
 
   &:disabled path,
   &:disabled {

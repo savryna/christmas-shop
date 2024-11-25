@@ -64,7 +64,7 @@
   background-color: $content-bg;
   display: flex;
   flex-direction: column;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
 
   .cardHeader {
     @include header3;
