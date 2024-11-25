@@ -46,7 +46,7 @@
 
   @media screen and (width < 1440px) {
     & {
-      max-width: 648px;
+      max-width: 648 px;
       margin: 0 auto;
     }
   }
@@ -73,7 +73,7 @@
     transition: all 0.3s ease;
   }
 
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     &:hover .cardHeader {
       color: $primary;
     }

@@ -105,7 +105,7 @@
     }
   }
 
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     &:hover {
       color: variables.$primary;
 
@@ -130,7 +130,7 @@
       position: relative;
       z-index: 10;
 
-      @media (hover: hover) {
+      @media (hover: hover) and (pointer: fine) {
         &:hover {
           background-color: transparent;
 

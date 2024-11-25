@@ -81,7 +81,7 @@
     background-color: variables.$static-white-40;
   }
 
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: variables.$static-white-40;
     }
@@ -117,7 +117,7 @@
     transition: all 0.3s ease;
   }
 
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     &:hover .cardInnerText {
       color: variables.$primary;
     }
