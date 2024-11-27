@@ -42,4 +42,16 @@ export class BaseElement {
   remove() {
     this._elem.remove();
   }
+
+  controlClass(style, option) {
+    this._elem.classList.toggle(style, option);
+  }
+
+  hasClass(style) {
+    return this._elem.classList.contains(style);
+  }
+
+  addEventListener(event, callback) {
+    this._elem.addEventListener(event, callback);
+  }
 }

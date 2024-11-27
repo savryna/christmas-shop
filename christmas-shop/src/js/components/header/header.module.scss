@@ -51,16 +51,17 @@
   @media screen and (width <= 768px) {
     position: fixed;
     top: 64px;
-    left: 0;
     background-color: variables.$static-white;
     width: 100%;
     height: calc(100dvh - 64px);
-    display: none;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    right: -100%;
+    opacity: 0;
 
     &.open {
-      transform: translateX(0);
+      right: 0;
+      transform: translateX(-0);
+      opacity: 1;
     }
   }
 }
@@ -158,7 +159,7 @@
     width: 20px;
     height: 1px;
     background-color: variables.$dark;
-    transform: rotate(0);
+    transform: rotate(0deg);
     transition: all 0.3s ease;
     position: absolute;
     top: 26px;
@@ -168,23 +169,13 @@
     width: 20px;
     height: 1px;
     background-color: variables.$dark;
-    transform: rotate(0);
+    transform: rotate(0deg);
     transition: all 0.3s ease;
     position: absolute;
     top: 19px;
   }
 
   // &.active {
-  &:active {
-    &::before {
-      top: auto;
-      transform: rotate(45deg);
-    }
-    &::after {
-      top: auto;
-      transform: rotate(-45deg);
-    }
-  }
 
   @media screen and (width <= 768px) {
     display: flex;
@@ -192,4 +183,17 @@
     justify-content: center;
     align-items: center;
   }
+}
+
+.nav.open + .burgerButton {
+  &::before {
+    transform: rotate(135deg) translate(2px, -3px);
+  }
+  &::after {
+    transform: rotate(225deg) translate(2px, 3px);
+  }
+}
+
+.noScroll {
+  overflow: hidden;
 }

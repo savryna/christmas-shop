@@ -20,6 +20,7 @@ export class Header extends BaseElement {
     });
     const logoText = new BaseElement('h1', [styles.logoText], {}, 'the gifts');
     const navigation = new BaseElement('nav', [styles.nav]);
+    this.navigation = navigation;
     const navList = new BaseElement('ul', [styles.navList]);
     const navLink = Array.from(
       { length: this.navLinks.length },
@@ -37,10 +38,12 @@ export class Header extends BaseElement {
       { length: this.navLinks.length },
       (_, idx) => new BaseElement('li', [styles.navItem]),
     );
+    this.navItem = navItem;
 
     navItem.forEach((item, idx) => item.append(navLink[idx]));
 
     const burgerButton = new BaseElement('div', [styles.burgerButton]);
+    this.burgerButton = burgerButton;
     // const hr = Array.from({ length: 2 }, () => new BaseElement('hr'));
 
     // burgerButton.append(...hr);
@@ -49,10 +52,44 @@ export class Header extends BaseElement {
     navList.append(...navItem);
     navigation.append(navList);
     this.append(logo, navigation, burgerButton);
+
+    this.isBurgerOpen = false;
+    this.openBurgerMenu();
   }
 
   activeClassNav() {
     this.navLink[0].addClasses([styles.active]);
     this.navLink[0].removeAttributes(['href']);
+  }
+
+  openBurgerMenu() {
+    this.burgerButton.addEventListener('click', () => {
+      this.navigation.controlClass(styles.open);
+      this.toggleStatus();
+    });
+
+    this.navItem.forEach((link) =>
+      link.addEventListener('click', () => {
+        this.navigation.controlClass(styles.open, false);
+        this.toggleStatus();
+      }),
+    );
+
+    window.addEventListener('resize', () => {
+      this.navigation.controlClass(
+        styles.open,
+        window.innerWidth < 768 && this.navigation.hasClass(styles.open),
+      );
+    });
+  }
+
+  toggleStatus() {
+    if (!this.isBurgerOpen) {
+      this.isBurgerOpen = true;
+      document.body.classList.add(styles.noScroll);
+    } else {
+      this.isBurgerOpen = false;
+      document.body.classList.remove(styles.noScroll);
+    }
   }
 }

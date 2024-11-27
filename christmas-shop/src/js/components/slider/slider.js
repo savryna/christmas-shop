@@ -68,7 +68,6 @@ export class Slider extends BaseElement {
             }),
         ),
     );
-
     pictureElems.forEach((picture, idxPicture) =>
       picture.append(...sourceElems[idxPicture], imgElems[idxPicture]),
     );
