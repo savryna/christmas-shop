@@ -23,6 +23,8 @@ export class Slider extends BaseElement {
   ];
   imgExtension = ['avif', 'webp', 'png'];
 
+  moveIndex = 0;
+
   constructor() {
     super('section', [styles.sliderSection]);
 
@@ -41,6 +43,7 @@ export class Slider extends BaseElement {
 
     const sliderContainer = new BaseElement('div', [styles.sliderContainer]);
     const sliderItems = new BaseElement('div', [styles.sliderItems]);
+    this.sliderItems = sliderItems;
 
     const imgElems = Array.from(
       { length: this.sliderSrc.length },
@@ -111,6 +114,7 @@ export class Slider extends BaseElement {
       />
     </svg>`,
     );
+    this.arrowRight = arrowRight;
 
     const arrowLeft = new BaseElement(
       'button',
@@ -132,10 +136,74 @@ export class Slider extends BaseElement {
       </svg>
       `,
     );
+    this.arrowLeft = arrowLeft;
 
     sliderControls.append(arrowLeft, arrowRight);
     sliderItems.append(...sliderArray);
     sliderContainer.append(sliderItems, sliderControls);
     this.append(gratitude, gratitudeBottom, sliderContainer);
+
+    this.moveSliderStart();
+    this.moveRight();
+    this.moveLeft();
+    this.widthSlider = 1993 + this.countWidthPadding();
+    this.currentVW = Math.min(window.innerWidth, 1440);
+    this.minVw = 768;
+    this.visible = this.currentVW - this.countWidthPadding();
+    this.numberOfClick = this.currentVW > this.minVw ? 3 : 6;
+    this.widthMove = (this.widthSlider - this.visible) / this.numberOfClick;
+  }
+
+  countWidthPadding() {
+    const minVW = 768;
+    const maxVW = 1440;
+    const minPadding = 8;
+    const maxPaddimg = 82;
+    const currentVW = Math.min(window.innerWidth, 1440);
+    const linearInterpolation =
+      minPadding +
+      ((maxPaddimg - minPadding) * (currentVW - minVW)) / (maxVW - minVW);
+    return linearInterpolation;
+  }
+
+  moveSliderStart() {
+    window.addEventListener('resize', () => {
+      this.moveIndex = 0;
+      this.numberOfClick = this.currentVW > this.minVw ? 3 : 6;
+      this.checkDisabledButton();
+      this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
+    });
+  }
+
+  moveRight() {
+    this.arrowRight.addEventListener('click', () => {
+      this.moveIndex += 1;
+      this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
+
+      console.log(this.moveIndex);
+      this.checkDisabledButton();
+    });
+  }
+
+  moveLeft() {
+    this.arrowLeft.addEventListener('click', () => {
+      console.log(this.moveIndex);
+      this.moveIndex -= 1;
+      this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
+      this.checkDisabledButton();
+    });
+  }
+
+  checkDisabledButton() {
+    if (this.moveIndex >= 1) {
+      this.arrowLeft.removeAttributes(['disabled']);
+    }
+    if (this.moveIndex >= this.numberOfClick) {
+      this.arrowRight.setAttributes({ disabled: 'disabled' });
+    }
+    if (this.moveIndex <= 0) {
+      this.arrowRight.removeAttributes(['disabled']);
+      this.arrowLeft.setAttributes({ disabled: 'disabled' });
+    }
   }
 }
