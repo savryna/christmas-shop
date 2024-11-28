@@ -144,14 +144,11 @@ export class Slider extends BaseElement {
     this.append(gratitude, gratitudeBottom, sliderContainer);
 
     this.moveSliderStart();
-    this.moveRight();
-    this.moveLeft();
-    this.widthSlider = 1993 + this.countWidthPadding();
-    this.currentVW = Math.min(window.innerWidth, 1440);
-    this.minVw = 768;
-    this.visible = this.currentVW - this.countWidthPadding();
-    this.numberOfClick = this.currentVW > this.minVw ? 3 : 6;
-    this.widthMove = (this.widthSlider - this.visible) / this.numberOfClick;
+    this.countVariables();
+    this.arrowLeft.addEventListener('click', () => this.moveLeft());
+    this.arrowRight.addEventListener('click', () => this.moveRight());
+    // this.moveRight();
+    // this.moveLeft();
   }
 
   countWidthPadding() {
@@ -166,32 +163,50 @@ export class Slider extends BaseElement {
     return linearInterpolation;
   }
 
+  countVariables() {
+    this.widthSlider = 1993 + this.countWidthPadding();
+    this.currentVW = Math.min(window.innerWidth, 1440);
+    this.minVw = 768;
+    this.visible = this.currentVW - this.countWidthPadding();
+    this.numberOfClick = this.currentVW > this.minVw ? 3 : 6;
+    this.widthMove = (this.widthSlider - this.visible) / this.numberOfClick;
+    return [
+      this.widthSlider,
+      this.currentVW,
+      this.minVw,
+      this.visible,
+      this.numberOfClick,
+      this.widthMove,
+    ];
+  }
+
   moveSliderStart() {
     window.addEventListener('resize', () => {
+      this.countVariables();
+      this.checkDisabledButton();
       this.moveIndex = 0;
       this.numberOfClick = this.currentVW > this.minVw ? 3 : 6;
-      this.checkDisabledButton();
       this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
     });
   }
 
   moveRight() {
-    this.arrowRight.addEventListener('click', () => {
-      this.moveIndex += 1;
-      this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
+    // this.arrowRight.addEventListener('click', () => {
+    this.moveIndex += 1;
+    this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
 
-      console.log(this.moveIndex);
-      this.checkDisabledButton();
-    });
+    // console.log(this.moveIndex);
+    this.checkDisabledButton();
+    // });
   }
 
   moveLeft() {
-    this.arrowLeft.addEventListener('click', () => {
-      console.log(this.moveIndex);
-      this.moveIndex -= 1;
-      this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
-      this.checkDisabledButton();
-    });
+    // this.arrowLeft.addEventListener('click', () => {
+    // console.log(this.moveIndex);
+    this.moveIndex -= 1;
+    this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
+    this.checkDisabledButton();
+    // });
   }
 
   checkDisabledButton() {
