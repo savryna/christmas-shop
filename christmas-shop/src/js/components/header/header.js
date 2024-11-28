@@ -64,6 +64,10 @@ export class Header extends BaseElement {
 
   openBurgerMenu() {
     this.burgerButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
       this.navigation.controlClass(styles.open);
       this.toggleStatus();
     });

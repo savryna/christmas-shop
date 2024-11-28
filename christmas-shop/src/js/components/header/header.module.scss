@@ -17,6 +17,8 @@
   @media screen and (width <= 768px) {
     & {
       padding: 9.4px 8px;
+      position: relative;
+      z-index: 1;
     }
   }
 }
@@ -50,10 +52,12 @@
 .nav {
   @media screen and (width <= 768px) {
     position: fixed;
-    top: 64px;
+    // top: 64px;
+    z-index: -1;
+    height: 100dvh;
     background-color: variables.$static-white;
     width: 100%;
-    height: calc(100dvh - 64px);
+    // height: calc(100dvh - 64px);
     transition: all 0.3s ease-in;
     right: -100%;
     opacity: 0;
@@ -79,6 +83,7 @@
       flex-direction: column;
       justify-content: center;
       gap: 32px;
+      padding-top: 49px;
     }
   }
 }
