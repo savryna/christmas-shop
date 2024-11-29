@@ -53,7 +53,7 @@ export class Header extends BaseElement {
     navigation.append(navList);
     this.append(logo, navigation, burgerButton);
 
-    this.isBurgerOpen = false;
+    // this.isBurgerOpen = false;
     this.openBurgerMenu();
   }
 
@@ -69,13 +69,13 @@ export class Header extends BaseElement {
         behavior: 'smooth',
       });
       this.navigation.controlClass(styles.open);
-      this.toggleStatus();
+      this.isMenuOpen();
     });
 
     this.navItem.forEach((link) =>
       link.addEventListener('click', () => {
         this.navigation.controlClass(styles.open, false);
-        this.toggleStatus();
+        this.isMenuOpen();
       }),
     );
 
@@ -87,12 +87,10 @@ export class Header extends BaseElement {
     });
   }
 
-  toggleStatus() {
-    if (!this.isBurgerOpen) {
-      this.isBurgerOpen = true;
+  isMenuOpen() {
+    if (this.navigation.hasClass(styles.open)) {
       document.body.classList.add(styles.noScroll);
     } else {
-      this.isBurgerOpen = false;
       document.body.classList.remove(styles.noScroll);
     }
   }

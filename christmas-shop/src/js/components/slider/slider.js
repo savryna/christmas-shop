@@ -42,8 +42,8 @@ export class Slider extends BaseElement {
     );
 
     const sliderContainer = new BaseElement('div', [styles.sliderContainer]);
-    const sliderItems = new BaseElement('div', [styles.sliderItems]);
-    this.sliderItems = sliderItems;
+    this.sliderItems = new BaseElement('div', [styles.sliderItems]);
+    // this.sliderItems = sliderItems;
 
     const imgElems = Array.from(
       { length: this.sliderSrc.length },
@@ -139,8 +139,8 @@ export class Slider extends BaseElement {
     this.arrowLeft = arrowLeft;
 
     sliderControls.append(arrowLeft, arrowRight);
-    sliderItems.append(...sliderArray);
-    sliderContainer.append(sliderItems, sliderControls);
+    this.sliderItems.append(...sliderArray);
+    sliderContainer.append(this.sliderItems, sliderControls);
     this.append(gratitude, gratitudeBottom, sliderContainer);
 
     this.moveSliderStart();
@@ -164,14 +164,14 @@ export class Slider extends BaseElement {
   countVariables() {
     this.widthSlider = 1993 + this.countWidthPadding();
     this.currentVW = Math.min(window.innerWidth, 1440);
-    this.minVw = 380;
+    this.brakePointOfClick = 768;
     this.visible = this.currentVW - this.countWidthPadding();
-    this.numberOfClick = this.currentVW > this.minVw ? 3 : 6;
+    this.numberOfClick = this.currentVW > this.brakePointOfClick ? 3 : 6;
     this.widthMove = (this.widthSlider - this.visible) / this.numberOfClick;
     return [
       this.widthSlider,
       this.currentVW,
-      this.minVw,
+      this.brakePointOfClick,
       this.visible,
       this.numberOfClick,
       this.widthMove,
@@ -183,7 +183,7 @@ export class Slider extends BaseElement {
       this.countVariables();
       this.checkDisabledButton();
       this.moveIndex = 0;
-      this.numberOfClick = this.currentVW > this.minVw ? 3 : 6;
+      this.numberOfClick = this.currentVW > this.brakePointOfClick ? 3 : 6;
       this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
     });
   }

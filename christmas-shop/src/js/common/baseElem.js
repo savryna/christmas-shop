@@ -10,6 +10,10 @@ export class BaseElement {
     this._elem.classList.add(...cssClasses);
   }
 
+  innerHTML(innerContent) {
+    this._elem.innerHTML = innerContent;
+  }
+
   removeAttributes(attributes) {
     attributes.forEach((atr) => this._elem.removeAttribute(atr));
     // this._elem.removeAttribute(...attributes);
