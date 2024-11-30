@@ -3,6 +3,7 @@ import { Header } from '../header/header.js';
 import { Main } from '../main/main.js';
 import { Main2Page } from '../main2Page/main.js';
 import { Footer } from '../footer/footer.js';
+
 import styles from './wrapper.module.scss';
 
 export class Root extends BaseElement {
@@ -26,7 +27,7 @@ export class RootGifts extends BaseElement {
     super('div', [styles.wrapper]);
 
     const header = new Header();
-    header.activeClassNav(0);
+    header.activeClassNav();
     const main = new Main2Page();
     const footer = new Footer();
 

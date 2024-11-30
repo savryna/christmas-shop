@@ -1,5 +1,13 @@
 @import url('../../node_modules/modern-normalize/modern-normalize.css');
 
+* {
+  -webkit-tap-highlight-color: transparent;
+
+  @media (hover: hover) {
+    outline: transparent;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -8,7 +16,6 @@ button {
   background-color: transparent;
   color: inherit;
   border: none;
-  /* padding: 0; */
 }
 
 a {
@@ -33,4 +40,8 @@ li {
 ul {
   margin: 0;
   padding: 0;
+}
+
+hr {
+  margin: 0;
 }

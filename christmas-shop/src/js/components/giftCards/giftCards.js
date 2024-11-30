@@ -62,7 +62,7 @@ export class GiftCards extends BaseElement {
       'h2',
       [styles.title],
       {},
-      'Achieve health,<br> harmony, and<br> inner strength',
+      'Achieve health, harmony, and inner strength',
     );
 
     const tabsContainer = new BaseElement('ul', [styles.tabsContainer]);

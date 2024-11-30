@@ -11,22 +11,39 @@
   @include mixins.caption;
 
   color: variables.$static-white;
-  margin-bottom: 20px;
+  margin-bottom: 13px;
+}
 
-  span {
-    @include mixins.header2;
+.gratitudeBottom {
+  @include mixins.header2;
+  color: variables.$static-white;
+  margin-left: 4px;
+  margin-bottom: 19px;
+}
 
-    margin-top: 12px;
-  }
+.sliderContainer {
+  overflow: hidden;
 }
 
 .sliderItems {
   padding-left: 82px;
+  padding-left: clamp(
+    8px,
+    8px + (82 - 8) * ((100vw - 768px) / (1440 - 768)),
+    82px
+  );
   display: flex;
   gap: 20px;
   align-items: center;
-  overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 16.2px;
+  transition: transform 0.3s ease-in;
+
+  // @media screen and (width <= 1440px) {
+  //   padding-left: 5.69vw;
+  // }
+  // @media screen and (width <= 768px) {
+  //   padding-left: 8px;
+  // }
 }
 
 .sliderImgs {
@@ -47,6 +64,17 @@
   gap: 20px;
   padding: 0 82px;
   justify-content: flex-end;
+
+  @media screen and (width <= 1440px) {
+    & {
+      padding: 0 5.69vw;
+    }
+  }
+  @media screen and (width <= 768px) {
+    & {
+      padding: 0 8px;
+    }
+  }
 }
 
 .sliderButton {
@@ -57,7 +85,7 @@
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
 
   &:disabled path,
   &:disabled {
@@ -66,11 +94,13 @@
     cursor: default;
   }
 
-  &:hover:not(:disabled) {
-    background-color: variables.$static-white;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover:not(:disabled) {
+      background-color: variables.$static-white;
 
-    svg path {
-      stroke: variables.$primary;
+      svg path {
+        stroke: variables.$primary;
+      }
     }
   }
 }

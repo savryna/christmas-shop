@@ -6,6 +6,7 @@
   font-style: normal;
   src: url('/fonts/montserrat/Montserrat-Regular.ttf'),
     url('/fonts/montserrat/Montserrat-Regular.woff');
+  font-display: swap;
 }
 
 @font-face {
@@ -14,6 +15,7 @@
   font-style: normal;
   src: url('/fonts/montserrat/Montserrat-SemiBold.ttf'),
     url('/fonts/montserrat/Montserrat-SemiBold.woff');
+  font-display: swap;
 }
 
 @font-face {
@@ -22,6 +24,7 @@
   font-style: normal;
   src: url('/fonts/allura/Allura-Regular.ttf'),
     url('/fonts/allura/Allura-Regular.woff');
+  font-display: swap;
 }
 
 @mixin header1 {
@@ -99,10 +102,22 @@
 }
 
 @mixin snowBack {
-  background: url('../../../img/bg-snow.png');
+  background-image: image-set(
+    url('../../../img/bg-snow.avif') type('image/avif'),
+    url('../../../img/bg-snow.webp') type('image/webp'),
+    url('../../../img/bg-snow.png') type('image/png')
+  );
   background-position: center;
   background-size: cover;
   text-align: center;
+
+  @media screen and (width <= 768px) {
+    background-image: image-set(
+      url('../../../img/bg-snow-1400.avif') type('image/avif'),
+      url('../../../img/bg-snow-1400.webp') type('image/webp'),
+      url('../../../img/bg-snow-1400.png') type('image/png')
+    );
+  }
 }
 
 @mixin buttonLink {
@@ -113,10 +128,12 @@
   background-color: variables.$dark;
   border-radius: 20px;
   transition: all 0.3s ease-in;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
 
-  &:hover {
-    background-color: variables.$static-white;
-    color: variables.$dark;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: variables.$static-white;
+      color: variables.$dark;
+    }
   }
 }

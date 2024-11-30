@@ -16,6 +16,6 @@ export class Main extends BaseElement {
     const giftsElement = new GiftsElement();
     const ctaSection = new CTASection();
 
-    this.append(hero, slider, about, giftsElement, ctaSection);
+    this.append(hero, about, slider, giftsElement, ctaSection);
   }
 }

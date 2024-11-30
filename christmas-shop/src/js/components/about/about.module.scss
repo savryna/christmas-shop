@@ -5,6 +5,14 @@
   @include mixins.snowBack;
 
   padding: 60px 82px;
+
+  @media screen and (width <= 1440px) {
+    padding: 60px 5.69vw;
+  }
+
+  @media screen and (width <= 768px) {
+    padding: 60px 8px;
+  }
 }
 
 .aboutContent {
@@ -14,11 +22,51 @@
   display: flex;
   border-radius: 20px;
   text-align: left;
+
+  @media screen and (width <= 700px) {
+    & {
+      flex-direction: column;
+    }
+  }
+}
+
+.aboutContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  padding: 0 60px;
+
+  @media screen and (width <= 730px) {
+    & {
+      padding: 0 4.8125vw;
+    }
+  }
+
+  @media screen and (width <= 700px) {
+    & {
+      align-items: center;
+      padding: 0 5.1125vw;
+    }
+  }
 }
 
 .aboutDescriptionBlock {
-  padding: 160px 152px 160px 60px;
+  // padding: 160px 152px 160px 60px;
+  padding: 160px 0;
   flex-basis: 50%;
+  max-width: 426px;
+
+  @media screen and (width <= 1440px) {
+    padding: 11.1vw 0;
+  }
+
+  @media screen and (width <= 768px) {
+    padding: 106px 0;
+  }
+  @media screen and (width <= 700px) {
+    padding: 15.7vw 0;
+  }
 }
 
 .descriptionTitle {
@@ -41,8 +89,20 @@
 .aboutImg {
   flex-basis: 50%;
   border-radius: 20px;
-  background: url('../../../img/santa.png');
+  // background: url('../../../img/santa.png');
+  background: image-set(
+    url('../../../img/santa.avif') type('image/avif'),
+    url('../../../img/santa.webp') type('image/webp'),
+    url('../../../img/santa.png') type('image/png')
+  );
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+
+  @media screen and (width <= 700px) {
+    & {
+      height: 528px;
+      flex-basis: auto;
+    }
+  }
 }

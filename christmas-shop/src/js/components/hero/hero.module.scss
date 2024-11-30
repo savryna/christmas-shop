@@ -6,18 +6,39 @@ p {
 }
 
 .hero {
-  background: url('../../../img/bg-snow.png'), url('../../../img/bg-ball.png');
+  background-image: image-set(
+      url('../../../img/bg-snow.avif') type('image/avif'),
+      url('../../../img/bg-snow.webp') type('image/webp'),
+      url('../../../img/bg-snow.png') type('image/png')
+    ),
+    image-set(
+      url('../../../img/bg-ball.avif') type('image/avif'),
+      url('../../../img/bg-ball.webp') type('image/webp'),
+      url('../../../img/bg-ball.png') type('image/png')
+    );
+
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 20px 20px 0 0;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 120px 0;
+}
+
+.containerContent {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 120px 507px;
+  max-width: 430px;
   text-align: center;
+
+  @media screen and (width <= 460px) {
+    // padding: 0 8px;
+  }
 }
 
 .congratulationTop,

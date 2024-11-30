@@ -2,24 +2,41 @@
 @use '../../../styles/variables.scss';
 
 .ctaSection {
-  padding: 60px 0;
-  background: url('../../../img/bg-snow.png'), url('../../../img/bg-forest.png');
+  padding: 60px 7px;
+  // background: url('../../../img/bg-snow.png'), url('../../../img/bg-forest.png');
+  background: image-set(
+      url('../../../img/bg-snow.avif') type('image/avif'),
+      url('../../../img/bg-snow.webp') type('image/webp'),
+      url('../../../img/bg-snow.png') type('image/png')
+    ),
+    image-set(
+      url('../../../img/bg-forest.avif') type('image/avif'),
+      url('../../../img/bg-forest.webp') type('image/webp'),
+      url('../../../img/bg-forest.png') type('image/png')
+    );
   // background-size: contain;
   // background-repeat: no-repeat;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center bottom 0;
+  display: flex;
+  justify-content: center;
 }
 
 .ctaContent {
-  padding: 120px 507px;
+  padding: 121px 0;
+  max-width: 426px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 19px;
   justify-content: center;
   align-items: center;
   color: variables.$static-white;
   text-align: center;
+
+  @media screen and (width <= 500px) {
+    gap: 18px;
+  }
 }
 
 .question {
@@ -35,11 +52,19 @@
 }
 
 .timerBlock {
-  margin-top: -12px;
-  padding: 8px 12px 12px;
+  margin-top: -11px;
+  // padding: 8px 12px 12px;
+  width: 344px;
+  height: 73px;
   display: flex;
   background-color: variables.$static-white-40;
+  justify-content: center;
+  align-items: center;
   border-radius: 20px;
+
+  @media screen and (width <= 500px) {
+    margin-top: -10px;
+  }
 }
 
 .timerItem {
@@ -60,7 +85,7 @@
 .timerNumber {
   @include mixins.header2;
 
-  margin-bottom: -2px;
+  line-height: 145%;
 }
 
 .timerWord {

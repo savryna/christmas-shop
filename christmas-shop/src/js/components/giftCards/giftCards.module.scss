@@ -2,13 +2,41 @@
 @use '../../../styles/variables.scss';
 
 .giftCardsSection {
+  background: image-set(
+    url('../../../img/bg-garland.avif') type('image/avif'),
+    url('../../../img/bg-garland.webp') type('image/webp'),
+    url('../../../img/bg-garland.png') type('image/png')
+  );
+  background-repeat: no-repeat;
+  background-size: contain;
   padding: 60px 82px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (width <= 1440px) {
+    & {
+      padding: 60px 1.69vw;
+    }
+  }
+  @media screen and (width <= 768px) {
+    & {
+      padding: 60px 7.8125vw;
+    }
+  }
+
+  @media screen and (width <= 565px) {
+    & {
+      padding: 60px 13px;
+    }
+  }
 }
 
 .title {
   @include mixins.header1;
 
+  max-width: 430px;
   color: variables.$static-white;
   margin-bottom: 20px;
 }
@@ -19,13 +47,25 @@
   align-items: center;
   gap: 6px;
   margin-bottom: 20px;
+
+  @media screen and (width <= 400px) {
+    & {
+      gap: 0;
+    }
+  }
 }
 
 .tabItem {
   padding: 11px 15px;
   border-radius: 12px;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
   transition: all 0.3s ease;
+
+  @media screen and (width <= 500px) {
+    & {
+      padding: 11px 2px;
+    }
+  }
 
   .tabButton {
     @include mixins.action_small;
@@ -34,12 +74,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+    cursor: pointer;
   }
 
-  &:hover,
   &.active {
     background-color: variables.$static-white-40;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: variables.$static-white-40;
+    }
   }
 }
 
@@ -54,6 +99,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  justify-content: center;
 }
 
 .cardArticle {
@@ -63,7 +109,7 @@
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
 
   .cardInnerText {
     @include mixins.header3;
@@ -71,8 +117,10 @@
     transition: all 0.3s ease;
   }
 
-  &:hover .cardInnerText {
-    color: variables.$primary;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover .cardInnerText {
+      color: variables.$primary;
+    }
   }
 }
 
@@ -85,7 +133,7 @@
   flex: 1;
   background-color: variables.$static-white;
   text-align: left;
-  padding: 20px;
+  padding: 22px 20px 20px 20px;
   border-radius: 20px;
 }
 
@@ -100,9 +148,9 @@
 }
 
 .forHealth {
-  color: variables.$tag-pink;
+  color: variables.$tag-green;
 }
 
 .forHarmony {
-  color: variables.$tag-green;
+  color: variables.$tag-pink;
 }

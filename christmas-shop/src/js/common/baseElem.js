@@ -1,7 +1,10 @@
-export class BaseElement {
+import { Helper } from './helper';
+
+export class BaseElement extends Helper {
   constructor(tag, cssClasses = [], attributes = {}, innerContent = '') {
+    super();
+
     this._elem = document.createElement(tag);
-    // this._elem.classList.add(...cssClasses);
     this.addClasses(cssClasses);
     this.setAttributes(attributes);
     this._elem.innerHTML = innerContent;
@@ -9,6 +12,15 @@ export class BaseElement {
 
   addClasses(cssClasses) {
     this._elem.classList.add(...cssClasses);
+  }
+
+  innerHTML(innerContent) {
+    this._elem.innerHTML = innerContent;
+  }
+
+  removeAttributes(attributes) {
+    attributes.forEach((atr) => this._elem.removeAttribute(atr));
+    // this._elem.removeAttribute(...attributes);
   }
 
   append(...children) {
@@ -37,5 +49,17 @@ export class BaseElement {
 
   remove() {
     this._elem.remove();
+  }
+
+  controlClass(style, option) {
+    this._elem.classList.toggle(style, option);
+  }
+
+  hasClass(style) {
+    return this._elem.classList.contains(style);
+  }
+
+  addEventListener(event, callback) {
+    this._elem.addEventListener(event, callback);
   }
 }

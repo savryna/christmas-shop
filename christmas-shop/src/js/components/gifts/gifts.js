@@ -1,33 +1,25 @@
 import { BaseElement } from '../../common/baseElem.js';
 import styles from './gifts.module.scss';
+import data from '../../data/gifts.json';
 
 export class GiftsElement extends BaseElement {
   cardsContent = [
     {
-      src: './img/gift-for-work.png',
-      tag: 'for work',
-      title: 'Console.log Guru',
-      tagStyle: 'forWork',
+      src: './img/gift-for-work',
+      category: 'For Work',
     },
     {
-      src: './img/gift-for-health.png',
-      tag: 'for health',
-      title: 'Hydration Bot',
-      tagStyle: 'forHealt',
+      src: './img/gift-for-health',
+      category: 'For Health',
     },
     {
-      src: './img/gift-for-work.png',
-      tag: 'for work',
-      title: 'Merge Master',
-      tagStyle: 'forWork',
-    },
-    {
-      src: './img/gift-for-harmony.png',
-      tag: 'for harmony',
-      title: 'Spontaneous Coding Philosopher',
-      tagStyle: 'forHarmony',
+      src: './img/gift-for-harmony',
+      category: 'For Harmony',
     },
   ];
+
+  cardsCategory = ['For Work', 'For Health', 'For Harmony'];
+  imgExtension = ['avif', 'webp', 'png'];
   constructor() {
     super('section', [styles.giftsSection], { id: 'gifts' });
 
@@ -45,51 +37,86 @@ export class GiftsElement extends BaseElement {
     );
 
     const cardsContainer = new BaseElement('div', [styles.cards]);
-    const card = Array.from(
-      { length: this.cardsContent.length },
-      () => new BaseElement('article', [styles.card]),
+
+    cardsContainer.append(...this.createArrCard());
+
+    this.append(giftsTitle, giftsDescription, cardsContainer);
+    this.getDataForCard();
+  }
+
+  getRandomData() {
+    const randomCard = this.getRandomElem(data);
+    const indexCardFromData = data.indexOf(randomCard);
+    return randomCard;
+  }
+
+  findSrcToCard(cardFromRandom) {
+    return this.cardsContent.find(
+      (card) => card.category === cardFromRandom.category,
     );
-    const cardImg = Array.from(
-      { length: this.cardsContent.length },
-      (_, idx) =>
-        new BaseElement('img', [styles.cardImg], {
-          src: this.cardsContent[idx].src,
-          alt: `${this.cardsContent[idx].tag} gift image`,
+  }
+
+  getDataForCard() {
+    const currentCard = this.getRandomData();
+    const cardsCategory = this.findSrcToCard(currentCard);
+    const src = cardsCategory.src;
+    const category = cardsCategory.category;
+    const cssStyle = `${category.split(' ')[0].toLowerCase()}${category.split(' ')[1][0].toUpperCase() + category.split(' ')[1].slice(1)}`;
+    const cardHeader = currentCard.name;
+
+    return {
+      src: src,
+      category: category,
+      cssStyle: cssStyle,
+      cardHeader: cardHeader,
+    };
+  }
+
+  createCard() {
+    const data = this.getDataForCard();
+    this.card = new BaseElement('article', [styles.card]);
+    this.cardPicture = new BaseElement('picture', [styles.cardPicture]);
+    this.cardImg = new BaseElement('img', [styles.cardImg], {
+      src: `${data.src}.png`,
+      alt: `${data.category.toLowerCase()} gift image`,
+    });
+    this.cardSources = Array.from(
+      { length: this.imgExtension.length },
+      (_, idxSource) =>
+        new BaseElement('source', [], {
+          type: `image/${this.imgExtension[idxSource]}`,
+          srcset: `${data.src}.${this.imgExtension[idxSource]}`,
         }),
     );
 
-    const cardText = Array.from(
-      { length: this.cardsContent.length },
-      () => new BaseElement('div', [styles.cardText]),
+    this.cardText = new BaseElement('div', [styles.cardText]);
+    this.cardTag = new BaseElement(
+      'p',
+      [styles.cardTag, styles[data.cssStyle]],
+      {},
+      data.category.toLowerCase(),
     );
 
-    const cardTag = Array.from(
-      { length: this.cardsContent.length },
-      (_, idx) =>
-        new BaseElement(
-          'h3',
-          [styles.cardTag, styles[this.cardsContent[idx].tagStyle]],
-          {},
-          this.cardsContent[idx].tag,
-        ),
-    );
-    const cardHeader = Array.from(
-      { length: this.cardsContent.length },
-      (_, idx) =>
-        new BaseElement(
-          'p',
-          [styles.cardHeader],
-          {},
-          this.cardsContent[idx].title,
-        ),
+    this.cardHeader = new BaseElement(
+      'h3',
+      [styles.cardHeader],
+      {},
+      data.cardHeader,
     );
 
-    cardText.forEach((elem, idx) => elem.append(cardTag[idx], cardHeader[idx]));
+    this.cardText.append(this.cardTag, this.cardHeader);
+    this.cardPicture.append(...this.cardSources, this.cardImg);
+    this.card.append(this.cardPicture, this.cardText);
+    return this.card;
+  }
 
-    card.forEach((elem, idx) => elem.append(cardImg[idx], cardText[idx]));
-    cardsContainer.append(...card);
+  createArrCard() {
+    const arrCard = [];
+    const cardAmount = 4;
 
-    console.log(cardImg);
-    this.append(giftsTitle, giftsDescription, cardsContainer);
+    for (let i = 0; i < cardAmount; i++) {
+      arrCard.push(this.createCard());
+    }
+    return arrCard;
   }
 }
