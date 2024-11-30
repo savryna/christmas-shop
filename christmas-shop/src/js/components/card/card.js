@@ -1,8 +1,8 @@
-import { BaseElement } from '../../common/baseElem.js';
-import styles from './gifts.module.scss';
+import { BaseElement } from '../../common/baseElem';
+import styles from './card.module.scss';
 import data from '../../data/gifts.json';
 
-export class GiftsElement extends BaseElement {
+export class Card extends BaseElement {
   cardsContent = [
     {
       src: './img/gift-for-work',
@@ -17,31 +17,13 @@ export class GiftsElement extends BaseElement {
       category: 'For Harmony',
     },
   ];
-
   cardsCategory = ['For Work', 'For Health', 'For Harmony'];
   imgExtension = ['avif', 'webp', 'png'];
+
   constructor() {
-    super('section', [styles.giftsSection], { id: 'gifts' });
-
-    const giftsTitle = new BaseElement(
-      'h2',
-      [styles.giftsTitle],
-      {},
-      'Best Gifts',
-    );
-    const giftsDescription = new BaseElement(
-      'p',
-      [styles.giftsDescription],
-      {},
-      'especially for you',
-    );
-
-    const cardsContainer = new BaseElement('div', [styles.cards]);
-
-    cardsContainer.append(...this.createArrCard());
-
-    this.append(giftsTitle, giftsDescription, cardsContainer);
-    this.getDataForCard();
+    // super('article', [styles.card]);
+    super();
+    console.log(this.createCard());
   }
 
   getRandomData() {
@@ -106,13 +88,13 @@ export class GiftsElement extends BaseElement {
 
     this.cardText.append(this.cardTag, this.cardHeader);
     this.cardPicture.append(...this.cardSources, this.cardImg);
-    this.card.append(this.cardPicture, this.cardText);
+    this.append(this.cardPicture, this.cardText);
     return this.card;
   }
 
-  createArrCard() {
+  createArrCard(cardAmount) {
     const arrCard = [];
-    const cardAmount = 4;
+    // const cardAmount = number;
 
     for (let i = 0; i < cardAmount; i++) {
       arrCard.push(this.createCard());

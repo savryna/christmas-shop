@@ -4,7 +4,7 @@ import styles from './footer.module.scss';
 export class Footer extends BaseElement {
   contacts = [
     {
-      href: 'tel:+375(29)111-22-33',
+      href: 'tel:+375291112233',
       srcImg: './img/svg/santa-claus.svg',
       contact: '+375 (29) 111-22-33',
       description: 'Call Us',

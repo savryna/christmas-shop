@@ -17,6 +17,8 @@
   @media screen and (width <= 768px) {
     & {
       padding: 9.4px 8px;
+      position: relative;
+      z-index: 1;
     }
   }
 }
@@ -26,7 +28,7 @@
   padding: 8px 20px;
   gap: 8.7px;
   align-items: center;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
   transition: all 0.3s ease;
 
   .logoText {
@@ -50,17 +52,20 @@
 .nav {
   @media screen and (width <= 768px) {
     position: fixed;
-    top: 64px;
-    left: 0;
+    // top: 64px;
+    z-index: -1;
+    height: 100dvh;
     background-color: variables.$static-white;
     width: 100%;
-    height: calc(100dvh - 64px);
-    display: none;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in;
+    // height: calc(100dvh - 64px);
+    transition: all 0.3s ease-in;
+    right: -100%;
+    opacity: 0;
 
     &.open {
-      transform: translateX(0);
+      right: 0;
+      transform: translateX(-0);
+      opacity: 1;
     }
   }
 }
@@ -78,6 +83,7 @@
       flex-direction: column;
       justify-content: center;
       gap: 32px;
+      padding-top: 49px;
     }
   }
 }
@@ -88,7 +94,7 @@
   list-style-type: none;
 
   .navLink {
-    cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+    cursor: pointer;
     // padding: 12px 20.4px;
     // transition: all 0.3s ease;
 
@@ -151,14 +157,14 @@
   height: 40px;
   transition: all 0.3s ease;
   position: relative;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
 
   &::after {
     content: '';
     width: 20px;
     height: 1px;
     background-color: variables.$dark;
-    transform: rotate(0);
+    transform: rotate(0deg);
     transition: all 0.3s ease;
     position: absolute;
     top: 26px;
@@ -168,23 +174,13 @@
     width: 20px;
     height: 1px;
     background-color: variables.$dark;
-    transform: rotate(0);
+    transform: rotate(0deg);
     transition: all 0.3s ease;
     position: absolute;
     top: 19px;
   }
 
   // &.active {
-  &:active {
-    &::before {
-      top: auto;
-      transform: rotate(45deg);
-    }
-    &::after {
-      top: auto;
-      transform: rotate(-45deg);
-    }
-  }
 
   @media screen and (width <= 768px) {
     display: flex;
@@ -192,4 +188,17 @@
     justify-content: center;
     align-items: center;
   }
+}
+
+.nav.open + .burgerButton {
+  &::before {
+    transform: rotate(135deg) translate(2px, -3px);
+  }
+  &::after {
+    transform: rotate(225deg) translate(2px, 3px);
+  }
+}
+
+.noScroll {
+  overflow: hidden;
 }

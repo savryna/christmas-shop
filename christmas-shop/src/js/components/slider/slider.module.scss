@@ -21,20 +21,29 @@
   margin-bottom: 19px;
 }
 
+.sliderContainer {
+  overflow: hidden;
+}
+
 .sliderItems {
   padding-left: 82px;
+  padding-left: clamp(
+    8px,
+    8px + (82 - 8) * ((100vw - 768px) / (1440 - 768)),
+    82px
+  );
   display: flex;
   gap: 20px;
   align-items: center;
-  overflow: hidden;
   margin-bottom: 16.2px;
+  transition: transform 0.3s ease-in;
 
-  @media screen and (width <= 1440px) {
-    padding-left: 5.69vw;
-  }
-  @media screen and (width <= 768px) {
-    padding-left: 8px;
-  }
+  // @media screen and (width <= 1440px) {
+  //   padding-left: 5.69vw;
+  // }
+  // @media screen and (width <= 768px) {
+  //   padding-left: 8px;
+  // }
 }
 
 .sliderImgs {
@@ -76,7 +85,7 @@
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease;
-  cursor: url('../../../img/svg/pointinghand.svg'), pointer;
+  cursor: pointer;
 
   &:disabled path,
   &:disabled {

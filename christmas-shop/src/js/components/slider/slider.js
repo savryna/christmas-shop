@@ -23,6 +23,8 @@ export class Slider extends BaseElement {
   ];
   imgExtension = ['avif', 'webp', 'png'];
 
+  moveIndex = 0;
+
   constructor() {
     super('section', [styles.sliderSection]);
 
@@ -40,7 +42,8 @@ export class Slider extends BaseElement {
     );
 
     const sliderContainer = new BaseElement('div', [styles.sliderContainer]);
-    const sliderItems = new BaseElement('div', [styles.sliderItems]);
+    this.sliderItems = new BaseElement('div', [styles.sliderItems]);
+    // this.sliderItems = sliderItems;
 
     const imgElems = Array.from(
       { length: this.sliderSrc.length },
@@ -68,7 +71,6 @@ export class Slider extends BaseElement {
             }),
         ),
     );
-    console.log(sourceElems);
     pictureElems.forEach((picture, idxPicture) =>
       picture.append(...sourceElems[idxPicture], imgElems[idxPicture]),
     );
@@ -112,6 +114,7 @@ export class Slider extends BaseElement {
       />
     </svg>`,
     );
+    this.arrowRight = arrowRight;
 
     const arrowLeft = new BaseElement(
       'button',
@@ -133,45 +136,94 @@ export class Slider extends BaseElement {
       </svg>
       `,
     );
+    this.arrowLeft = arrowLeft;
 
     sliderControls.append(arrowLeft, arrowRight);
-    sliderItems.append(...sliderArray);
-    sliderContainer.append(sliderItems, sliderControls);
+    this.sliderItems.append(...sliderArray);
+    sliderContainer.append(this.sliderItems, sliderControls);
     this.append(gratitude, gratitudeBottom, sliderContainer);
+
+    this.moveSliderStart();
+    this.countVariables();
+    this.arrowLeft.addEventListener('click', () => this.moveLeft());
+    this.arrowRight.addEventListener('click', () => this.moveRight());
   }
-}
 
-{
-  /* <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
->
-  <path
-    d="M6 12H18.5M18.5 12L12.5 6M18.5 12L12.5 18"
-    stroke="white"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  />
-</svg>; */
-}
+  // clamp (min, interpolation, max)
 
-{
-  /* <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
->
-  <path
-    d="M18.5 12H6M6 12L12 6M6 12L12 18"
-    stroke="white"
-    stroke-opacity="0.4"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  />
-</svg>; */
+  // clamp(8px, 8px + 74*(100vw - 768px) / 672, 82px);
+  countWidthPadding() {
+    const minVW = 380;
+    const middleVW = 768;
+    const maxVW = 1440;
+    const minPadding = 8;
+    const maxPadding = 82;
+    const currentVW = Math.min(window.innerWidth, 1440);
+    const linearInterpolation =
+      minPadding +
+      ((maxPadding - minPadding) * (currentVW - middleVW)) / (maxVW - middleVW);
+    let resPadding = Math.max(
+      minPadding,
+      Math.min(linearInterpolation, maxPadding),
+    );
+    // if (minPadding < linearInterpolation) {
+    //   resPadding = minPadding
+    // } else if ()
+
+    console.log(minPadding, resPadding, maxPadding);
+    return resPadding;
+  }
+
+  countVariables() {
+    this.widthSlider = 1993 + this.countWidthPadding();
+    this.currentVW = Math.min(window.innerWidth, 1440);
+    this.brakePointOfClick = 768;
+    this.visible = this.currentVW - this.countWidthPadding();
+    this.numberOfClick = this.currentVW > this.brakePointOfClick ? 3 : 6;
+    this.widthMove = (this.widthSlider - this.visible) / this.numberOfClick;
+    return [
+      this.widthSlider,
+      this.currentVW,
+      this.brakePointOfClick,
+      this.visible,
+      this.numberOfClick,
+      this.widthMove,
+    ];
+  }
+
+  moveSliderStart() {
+    window.addEventListener('resize', () => {
+      this.countVariables();
+      this.checkDisabledButton();
+      this.moveIndex = 0;
+      this.numberOfClick = this.currentVW > this.brakePointOfClick ? 3 : 6;
+      this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
+    });
+  }
+
+  moveRight() {
+    this.moveIndex += 1;
+    this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
+
+    this.checkDisabledButton();
+  }
+
+  moveLeft() {
+    this.moveIndex -= 1;
+    this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
+    this.checkDisabledButton();
+  }
+
+  checkDisabledButton() {
+    if (this.moveIndex >= 1) {
+      this.arrowLeft.removeAttributes(['disabled']);
+    }
+    if (this.moveIndex >= this.numberOfClick) {
+      this.arrowRight.setAttributes({ disabled: 'disabled' });
+    }
+    if (this.moveIndex <= 0) {
+      this.arrowRight.removeAttributes(['disabled']);
+      this.arrowLeft.setAttributes({ disabled: 'disabled' });
+    }
+  }
 }
