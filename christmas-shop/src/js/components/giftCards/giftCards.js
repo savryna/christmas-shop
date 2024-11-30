@@ -127,7 +127,9 @@ export class GiftCards extends BaseElement {
     // );
     // cardsContainer.append(...cardsArticle);
     const giftCardAmound = data.length;
-    cardsContainer.append(...this.createArrCard(giftCardAmound));
+    // cardsContainer.append(...this.createArrCard(giftCardAmound));
+    cardsContainer.append(...this.createArrCard());
+
     tabItem.forEach((li, idx) => li.append(tabsButton[idx]));
     tabsContainer.append(...tabItem);
     this.append(title, tabsContainer, cardsContainer);
@@ -146,13 +148,28 @@ export class GiftCards extends BaseElement {
   //   return arrInnerText[idx];
   // }
 
-  createArrCard(cardAmount) {
-    const setCard = new Set();
-    // const cardAmount = 4;
+  createArrCard() {
+    const arrCard = [];
+
+    const cardAmount = data.length;
+    // this.ArrayFromSet = Array.from(this.getRandomData());
 
     for (let i = 0; i < cardAmount; i++) {
-      setCard.add(new Card());
+      this.curCard = new Card();
+      // this.cardJSON = this.data[this.getRandomData()[i]];
+      // console.log(data[this.ArrayFromSet[i]]);
+      this.cardJSON = data[i];
+      arrCard.push(this.curCard.createCard(this.cardJSON));
+      // console.log(this.cardJSON);
+      // arrCard.push(this.curCard.createCard(this.data[this.getRandomData()[i]]));
     }
-    return setCard;
+    // for (let i = 0; i < cardAmount; i++) {
+    //   this.curCard = new Card();
+    //   console.log(this.curCardDesc);
+    //   arrCard.push(this.curCard.createCard(this.getRandomData().randomCard));
+    //   // console.log(new Card().cardDescription);
+    // }
+    console.log(arrCard);
+    return arrCard;
   }
 }

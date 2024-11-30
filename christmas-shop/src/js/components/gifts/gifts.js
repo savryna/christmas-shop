@@ -28,7 +28,7 @@ export class GiftsElement extends BaseElement {
     this.append(giftsTitle, giftsDescription, cardsContainer);
     // this.data = data;
     // this.getRandomData();
-    this.createArrCard();
+    // this.createArrCard();
   }
 
   // может получать сет из индексов от 0 до 31
