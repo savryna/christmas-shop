@@ -12,7 +12,16 @@
   align-items: center;
   justify-content: center;
   bottom: 8px;
-  right: 8px;
   z-index: 999;
+  right: -100%;
+
+  transition: all 0.5s ease;
   cursor: pointer;
+
+  @media screen and (width <= 768px) {
+    &.visible {
+      // transform: translateX(0);
+      right: 8px;
+    }
+  }
 }
