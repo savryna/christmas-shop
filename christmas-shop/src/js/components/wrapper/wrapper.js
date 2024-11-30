@@ -3,6 +3,7 @@ import { Header } from '../header/header.js';
 import { Main } from '../main/main.js';
 import { Main2Page } from '../main2Page/main.js';
 import { Footer } from '../footer/footer.js';
+
 import styles from './wrapper.module.scss';
 
 export class Root extends BaseElement {

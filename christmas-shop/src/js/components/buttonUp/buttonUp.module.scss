@@ -1,0 +1,18 @@
+@use '../../../styles/mixins.scss';
+@use '../../../styles/variables.scss';
+
+.button {
+  position: fixed;
+  background-color: variables.$static-white;
+  border: 1px solid variables.$primary;
+  border-radius: 100%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 8px;
+  right: 8px;
+  z-index: 999;
+  cursor: pointer;
+}
