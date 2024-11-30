@@ -18,12 +18,11 @@ export class Main2Page extends BaseElement {
 
   addButtonUp() {
     window.addEventListener('scroll', () => {
-      const buttonVisibilityRatio = 3;
-      const pageHeight = window.innerHeight / buttonVisibilityRatio;
+      const buttonVisibilityHeight = 300;
 
       this.button.controlClass(
         stylesButton.visible,
-        window.pageYOffset >= pageHeight,
+        window.pageYOffset >= buttonVisibilityHeight,
       );
     });
   }
