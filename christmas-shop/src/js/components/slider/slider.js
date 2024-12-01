@@ -41,7 +41,7 @@ export class Slider extends BaseElement {
       '<span>in the new 2025</span>',
     );
 
-    const sliderContainer = new BaseElement('div', [styles.sliderContainer]);
+    this.sliderContainer = new BaseElement('div', [styles.sliderContainer]);
     this.sliderItems = new BaseElement('div', [styles.sliderItems]);
     // this.sliderItems = sliderItems;
 
@@ -140,8 +140,8 @@ export class Slider extends BaseElement {
 
     sliderControls.append(arrowLeft, arrowRight);
     this.sliderItems.append(...sliderArray);
-    sliderContainer.append(this.sliderItems, sliderControls);
-    this.append(gratitude, gratitudeBottom, sliderContainer);
+    this.sliderContainer.append(this.sliderItems, sliderControls);
+    this.append(gratitude, gratitudeBottom, this.sliderContainer);
 
     this.moveSliderStart();
     this.countVariables();
@@ -149,16 +149,13 @@ export class Slider extends BaseElement {
     this.arrowRight.addEventListener('click', () => this.moveRight());
   }
 
-  // clamp (min, interpolation, max)
-
-  // clamp(8px, 8px + 74*(100vw - 768px) / 672, 82px);
   countWidthPadding() {
-    const minVW = 380;
     const middleVW = 768;
     const maxVW = 1440;
     const minPadding = 8;
     const maxPadding = 82;
-    const currentVW = Math.min(window.innerWidth, 1440);
+    const currentVW = Math.min(document.documentElement.clientWidth, 1440);
+
     const linearInterpolation =
       minPadding +
       ((maxPadding - minPadding) * (currentVW - middleVW)) / (maxVW - middleVW);
@@ -166,20 +163,22 @@ export class Slider extends BaseElement {
       minPadding,
       Math.min(linearInterpolation, maxPadding),
     );
-    // if (minPadding < linearInterpolation) {
-    //   resPadding = minPadding
-    // } else if ()
-
-    console.log(minPadding, resPadding, maxPadding);
     return resPadding;
   }
 
   countVariables() {
     this.widthSlider = 1993 + this.countWidthPadding();
-    this.currentVW = Math.min(window.innerWidth, 1440);
+    this.maxContentWidth = 1440;
+    this.currentVW = Math.min(window.innerWidth, this.maxContentWidth);
+    this.clickLargeScreen = 3;
+    this.clickSmallScreen = 6;
     this.brakePointOfClick = 768;
-    this.visible = this.currentVW - this.countWidthPadding();
-    this.numberOfClick = this.currentVW > this.brakePointOfClick ? 3 : 6;
+    this.visible =
+      this.currentVW - this.countWidthPadding() - this.getScrollbarWidth();
+    this.numberOfClick =
+      this.currentVW > this.brakePointOfClick
+        ? this.clickLargeScreen
+        : this.clickSmallScreen;
     this.widthMove = (this.widthSlider - this.visible) / this.numberOfClick;
     return [
       this.widthSlider,
@@ -225,5 +224,20 @@ export class Slider extends BaseElement {
       this.arrowRight.removeAttributes(['disabled']);
       this.arrowLeft.setAttributes({ disabled: 'disabled' });
     }
+  }
+
+  getScrollbarWidth() {
+    const outer = document.createElement('div');
+    outer.style.visibility = 'hidden';
+    outer.style.overflow = 'scroll';
+    document.body.appendChild(outer);
+
+    const inner = document.createElement('div');
+    outer.appendChild(inner);
+
+    const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+
+    outer.remove();
+    return scrollbarWidth;
   }
 }

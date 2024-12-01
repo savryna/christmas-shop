@@ -68,7 +68,7 @@ export class GiftsElement extends BaseElement {
     //   arrCard.push(this.curCard.createCard(this.getRandomData().randomCard));
     //   // console.log(new Card().cardDescription);
     // }
-    console.log(arrCard);
+    // console.log(arrCard);
     return arrCard;
   }
 }
