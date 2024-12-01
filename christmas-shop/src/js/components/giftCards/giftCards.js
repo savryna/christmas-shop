@@ -1,5 +1,7 @@
 import { BaseElement } from '../../common/baseElem.js';
 import styles from './giftCards.module.scss';
+import { Card } from '../card/card.js';
+import data from '../../data/gifts.json';
 
 export class GiftCards extends BaseElement {
   tabInner = ['All', 'for work', 'for health', 'for harmony'];
@@ -79,66 +81,95 @@ export class GiftCards extends BaseElement {
     });
 
     const cardsContainer = new BaseElement('div', [styles.cardsContainer]);
-    const cardsArticle = Array.from(
-      { length: this.layoutCardQueue.length },
-      (_, idx) => new BaseElement('article', [styles.cardArticle]),
-    );
-    const cardsImg = Array.from(
-      { length: this.layoutCardQueue.length },
-      (_, idx) =>
-        new BaseElement('img', [styles.cardImg], {
-          src: this.layoutCardQueue[idx].srcImg,
-          alt: 'gift image',
-        }),
-    );
-    const cardsDescription = Array.from(
-      { length: this.layoutCardQueue.length },
-      (_, idx) => new BaseElement('div', [styles.cardDescription]),
-    );
-    const cardsTag = Array.from(
-      { length: this.layoutCardQueue.length },
-      (_, idx) =>
-        new BaseElement(
-          'h3',
-          [styles.cardTag, styles[this.layoutCardQueue[idx].styleTag]],
-          {},
-          this.layoutCardQueue[idx].tag,
-        ),
-    );
-    const cardsInnerText = Array.from(
-      { length: this.layoutCardQueue.length },
-      (_, idx) =>
-        new BaseElement(
-          'p',
-          [styles.cardInnerText],
-          {},
-          this.addCardInnerText(idx),
-        ),
-    );
+    // const cardsArticle = Array.from(
+    //   { length: this.layoutCardQueue.length },
+    //   (_, idx) => new BaseElement('article', [styles.cardArticle]),
+    // );
+    // const cardsImg = Array.from(
+    //   { length: this.layoutCardQueue.length },
+    //   (_, idx) =>
+    //     new BaseElement('img', [styles.cardImg], {
+    //       src: this.layoutCardQueue[idx].srcImg,
+    //       alt: 'gift image',
+    //     }),
+    // );
+    // const cardsDescription = Array.from(
+    //   { length: this.layoutCardQueue.length },
+    //   (_, idx) => new BaseElement('div', [styles.cardDescription]),
+    // );
+    // const cardsTag = Array.from(
+    //   { length: this.layoutCardQueue.length },
+    //   (_, idx) =>
+    //     new BaseElement(
+    //       'h3',
+    //       [styles.cardTag, styles[this.layoutCardQueue[idx].styleTag]],
+    //       {},
+    //       this.layoutCardQueue[idx].tag,
+    //     ),
+    // );
+    // const cardsInnerText = Array.from(
+    //   { length: this.layoutCardQueue.length },
+    //   (_, idx) =>
+    //     new BaseElement(
+    //       'p',
+    //       [styles.cardInnerText],
+    //       {},
+    //       this.addCardInnerText(idx),
+    //     ),
+    // );
 
-    cardsArticle.forEach((article, idx) =>
-      article.append(cardsImg[idx], cardsDescription[idx]),
-    );
+    // cardsArticle.forEach((article, idx) =>
+    //   article.append(cardsImg[idx], cardsDescription[idx]),
+    // );
     // cardsArticle.append(...cardsImg);
-    cardsContainer.append(...cardsArticle);
-    cardsDescription.forEach((description, idx) =>
-      description.append(cardsTag[idx], cardsInnerText[idx]),
-    );
+    // cardsDescription.forEach((description, idx) =>
+    //   description.append(cardsTag[idx], cardsInnerText[idx]),
+    // );
+    // cardsContainer.append(...cardsArticle);
+    const giftCardAmound = data.length;
+    // cardsContainer.append(...this.createArrCard(giftCardAmound));
+    cardsContainer.append(...this.createArrCard());
+
     tabItem.forEach((li, idx) => li.append(tabsButton[idx]));
     tabsContainer.append(...tabItem);
     this.append(title, tabsContainer, cardsContainer);
   }
 
-  addCardInnerText(idx) {
-    const objIndexFromTag = {};
-    const arrInnerText = [];
-    this.layoutCardQueue.forEach((queueCardContent) => {
-      objIndexFromTag[queueCardContent.tag] =
-        objIndexFromTag[queueCardContent.tag] + 1 || 0;
-      arrInnerText.push(
-        queueCardContent.innerText[objIndexFromTag[queueCardContent.tag]],
-      );
-    });
-    return arrInnerText[idx];
+  // addCardInnerText(idx) {
+  //   const objIndexFromTag = {};
+  //   const arrInnerText = [];
+  //   this.layoutCardQueue.forEach((queueCardContent) => {
+  //     objIndexFromTag[queueCardContent.tag] =
+  //       objIndexFromTag[queueCardContent.tag] + 1 || 0;
+  //     arrInnerText.push(
+  //       queueCardContent.innerText[objIndexFromTag[queueCardContent.tag]],
+  //     );
+  //   });
+  //   return arrInnerText[idx];
+  // }
+
+  createArrCard() {
+    const arrCard = [];
+
+    const cardAmount = data.length;
+    // this.ArrayFromSet = Array.from(this.getRandomData());
+
+    for (let i = 0; i < cardAmount; i++) {
+      this.curCard = new Card();
+      // this.cardJSON = this.data[this.getRandomData()[i]];
+      // console.log(data[this.ArrayFromSet[i]]);
+      this.cardJSON = data[i];
+      arrCard.push(this.curCard.createCard(this.cardJSON));
+      // console.log(this.cardJSON);
+      // arrCard.push(this.curCard.createCard(this.data[this.getRandomData()[i]]));
+    }
+    // for (let i = 0; i < cardAmount; i++) {
+    //   this.curCard = new Card();
+    //   console.log(this.curCardDesc);
+    //   arrCard.push(this.curCard.createCard(this.getRandomData().randomCard));
+    //   // console.log(new Card().cardDescription);
+    // }
+    console.log(arrCard);
+    return arrCard;
   }
 }
