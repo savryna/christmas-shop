@@ -51,6 +51,10 @@ export class BaseElement extends Helper {
     this._elem.remove();
   }
 
+  removeChildren() {
+    this._elem.innerHTML = '';
+  }
+
   controlClass(style, option) {
     this._elem.classList.toggle(style, option);
   }
@@ -61,5 +65,9 @@ export class BaseElement extends Helper {
 
   addEventListener(event, callback) {
     this._elem.addEventListener(event, callback);
+  }
+
+  getInnerText() {
+    return this._elem.innerText;
   }
 }

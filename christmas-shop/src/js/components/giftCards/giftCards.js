@@ -68,12 +68,12 @@ export class GiftCards extends BaseElement {
     );
 
     const tabsContainer = new BaseElement('ul', [styles.tabsContainer]);
-    const tabsButton = Array.from(
+    this.tabsButton = Array.from(
       { length: this.tabInner.length },
       (_, idx) =>
         new BaseElement('button', [styles.tabButton], {}, this.tabInner[idx]),
     );
-    const tabItem = Array.from({ length: this.tabInner.length }, (tab, idx) => {
+    this.tabItem = Array.from({ length: this.tabInner.length }, (tab, idx) => {
       if (idx === 0) {
         return new BaseElement('li', [styles.tabItem, styles.active], {});
       }
@@ -82,12 +82,26 @@ export class GiftCards extends BaseElement {
 
     const cardsContainer = new BaseElement('div', [styles.cardsContainer]);
 
-    const giftCardAmound = data.length;
+    // const giftCardAmound = data.length;
     cardsContainer.append(...this.createArrCard());
 
-    tabItem.forEach((li, idx) => li.append(tabsButton[idx]));
-    tabsContainer.append(...tabItem);
+    this.tabItem.forEach((li, idx) => li.append(this.tabsButton[idx]));
+    const [allTab, workTab, healthTab, harmonyTab] = this.tabItem;
+    tabsContainer.append(...this.tabItem);
     this.append(title, tabsContainer, cardsContainer);
+
+    this.tabItem.forEach((tab) =>
+      tab.addEventListener('click', (event) => {
+        this.checkActiveTab(event.currentTarget);
+        cardsContainer.removeChildren();
+        cardsContainer.append(...this.filterGiftCards(event.currentTarget));
+
+        if (event.currentTarget === allTab._elem) {
+          console.log('gi');
+          cardsContainer.append(...this.createArrCard());
+        }
+      }),
+    );
   }
 
   createArrCard() {
@@ -100,7 +114,21 @@ export class GiftCards extends BaseElement {
       this.cardJSON = data[i];
       arrCard.push(this.curCard.createCard(this.cardJSON));
     }
-
     return arrCard;
+  }
+
+  filterGiftCards(filterButton) {
+    const filterCards = this.createArrCard().filter(
+      (card) =>
+        card.cardTag.getInnerText().toLowerCase() ===
+        filterButton.innerText.toLowerCase(),
+    );
+    console.log(filterCards);
+    return filterCards;
+  }
+
+  checkActiveTab(button) {
+    this.tabItem.forEach((tab) => tab.controlClass(styles.active, false));
+    button.classList.add(styles.active);
   }
 }
