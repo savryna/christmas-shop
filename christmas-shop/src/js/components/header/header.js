@@ -80,6 +80,7 @@ export class Header extends BaseElement {
     );
 
     window.addEventListener('resize', () => {
+      this.isMenuOpen();
       this.navigation.controlClass(
         styles.open,
         window.innerWidth < 768 && this.navigation.hasClass(styles.open),

@@ -28,7 +28,6 @@
 }
 
 .sliderItems {
-  padding-left: 82px;
   padding-left: clamp(
     8px,
     8px + (82 - 8) * ((100vw - 768px) / (1440 - 768)),

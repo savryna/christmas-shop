@@ -6,17 +6,17 @@
   background-color: variables.$static-white;
   display: flex;
   justify-content: space-between;
-  padding: 9.4px 82px;
+  padding: 9.4px variables.$padding;
 
-  @media screen and (width < 1440px) {
-    & {
-      padding: 9.4px 5.69vw;
-    }
-  }
+  // @media screen and (width < 1440px) {
+  //   & {
+  //     padding: 9.4px 5.69vw;
+  //   }
+  // }
 
   @media screen and (width <= 768px) {
     & {
-      padding: 9.4px 8px;
+      // padding: 9.4px 8px;
       position: relative;
       z-index: 1;
     }

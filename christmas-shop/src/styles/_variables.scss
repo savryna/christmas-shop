@@ -9,3 +9,5 @@ $tag-pink: #ff43f7;
 $tag-green: #06a44f;
 $content-bg: #ecf3f8;
 $overlay: rgba(24, 28, 41, 0.8);
+
+$padding: clamp(8px, 8px + (82 - 8) * ((100vw - 768px) / (1440 - 768)), 82px);

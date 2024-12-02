@@ -4,14 +4,14 @@
 .aboutSection {
   @include mixins.snowBack;
 
-  padding: 60px 82px;
+  padding: 60px variables.$padding;
 
   @media screen and (width <= 1440px) {
-    padding: 60px 5.69vw;
+    // padding: 60px 5.69vw;
   }
 
   @media screen and (width <= 768px) {
-    padding: 60px 8px;
+    // padding: 60px 8px;
   }
 }
 
