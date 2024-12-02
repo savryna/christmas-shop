@@ -192,9 +192,9 @@ export class Slider extends BaseElement {
 
   moveSliderStart() {
     window.addEventListener('resize', () => {
+      this.moveIndex = 0;
       this.countVariables();
       this.checkDisabledButton();
-      this.moveIndex = 0;
       this.numberOfClick = this.currentVW > this.brakePointOfClick ? 3 : 6;
       this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
     });
