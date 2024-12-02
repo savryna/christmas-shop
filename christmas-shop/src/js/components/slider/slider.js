@@ -169,7 +169,12 @@ export class Slider extends BaseElement {
   countVariables() {
     this.widthSlider = 1993 + this.countWidthPadding();
     this.maxContentWidth = 1440;
-    this.currentVW = Math.min(window.innerWidth, this.maxContentWidth);
+    // this.windowWidth = window.innerWidth - this.getScrollbarWidth();
+    // this.currentVW = Math.min(window.innerWidth, this.maxContentWidth);
+    // this.currentVW = Math.min(this.windowWidth, this.maxContentWidth);
+    // this.currentVW = window.clientWidth;
+    this.currentVW = window.innerWidth;
+
     this.clickLargeScreen = 3;
     this.clickSmallScreen = 6;
     this.brakePointOfClick = 768;
