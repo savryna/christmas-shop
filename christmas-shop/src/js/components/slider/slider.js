@@ -222,10 +222,12 @@ export class Slider extends BaseElement {
   checkDisabledButton() {
     if (this.moveIndex >= 1) {
       this.arrowLeft.removeAttributes(['disabled']);
+      this.arrowRight.removeAttributes(['disabled']);
     }
     if (this.moveIndex >= this.numberOfClick) {
       this.arrowRight.setAttributes({ disabled: 'disabled' });
     }
+
     if (this.moveIndex <= 0) {
       this.arrowRight.removeAttributes(['disabled']);
       this.arrowLeft.setAttributes({ disabled: 'disabled' });
