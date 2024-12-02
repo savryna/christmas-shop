@@ -91,18 +91,20 @@
 .superpowersItem {
   display: flex;
   align-items: center;
-  // justify-content: space-between;
+  justify-content: space-between;
 }
 
 .superpowersItemName {
   @include mixins.paragraph;
 
   text-transform: capitalize;
-  flex-basis: 50%;
+  // flex-basis: 50%;
+  width: 50%;
 }
 
 .superpowersPoint {
-  flex-basis: 50%;
+  // flex-basis: 50%;
+  max-width: 50%;
 }
 
 .superpowersPoint {
@@ -112,7 +114,9 @@
 }
 
 .snowflakeImg {
-  display: block;
+  // display: block;
+  width: 16px;
+  height: 16px;
 }
 
 .superpowersSnowflakeBlock {
@@ -136,3 +140,11 @@
 //   justify-content: center;
 //   gap: 12px;
 // }
+
+.buttonClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 0;
+  cursor: pointer;
+}

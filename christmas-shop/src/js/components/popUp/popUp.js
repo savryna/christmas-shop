@@ -1,9 +1,6 @@
 import { BaseElement } from '../../common/baseElem';
 import styles from './popUp.module.scss';
-// import { Main2Page } from '../main2Page/main';
-// import { Card } from '../card/card';
 import dataJSON from '../../data/gifts.json';
-// import GiftCards from '../../components/giftCards/giftCards.js';
 
 export class PopUp extends BaseElement {
   imgExtension = ['avif', 'webp', 'png'];
@@ -25,6 +22,8 @@ export class PopUp extends BaseElement {
     },
   ];
 
+  buttonCloseSrc = './img/svg/close.svg';
+
   snowflakePoint = {
     active: './img/svg/snowflake.svg',
     notActive: './img/svg/snowflake-not-active.svg',
@@ -34,19 +33,9 @@ export class PopUp extends BaseElement {
 
   constructor() {
     super('dialog', [styles.popUp]);
-
-    // const dataCard = new GiftCards().dataCard;
-    // console.log(dataCard);
-    // const cardArr = new GiftCards().cardArr;
-
-    // window.addEventListener('click', () => console.log(typeof cardArr));
     this.addEventListener('click', (event) => this.closeClickBack(event));
     this.addEventListener('keydown', (event) => this.closeKey(event));
   }
-
-  // getDataFromCard(data) {
-  //   console.log(data);
-  // }
 
   showDialog() {
     this.appendTo(document.body);
@@ -58,6 +47,10 @@ export class PopUp extends BaseElement {
     this._elem.close();
     this.setInnerHTML('');
     document.body.classList.remove(styles.noScroll);
+  }
+
+  closeFromButton(btn) {
+    btn.addEventListener('click', () => this.closeDialog());
   }
 
   closeKey(event) {
@@ -84,8 +77,6 @@ export class PopUp extends BaseElement {
     return this.modalsContent.find(
       (content) => content.category === data.category,
     );
-    // console.log(a);
-    // return a;
   }
 
   findInJSON(card) {
@@ -97,10 +88,14 @@ export class PopUp extends BaseElement {
   createPopUp(data) {
     const currentJSONCard = this.findInJSON(data);
     this.showDialog();
-    // console.log(data);
-    // console.log(currentJSONCard);
-    // console.log(this.findSrcToModal(data).cssStyle);
-    // console.log(data.cardImg.getAttribute('src'));
+
+    this.buttonClose = new BaseElement('button', [styles.buttonClose]);
+
+    this.imgButtonClose = new BaseElement('img', [], {
+      src: this.buttonCloseSrc,
+    });
+    this.buttonClose.append(this.imgButtonClose);
+
     this.modalPicture = new BaseElement('picture', [styles.modalPicture]);
     this.modalImg = new BaseElement('img', [styles.modalImg], {
       src: `${this.findSrcToModal(data).src}.png`,
@@ -176,79 +171,16 @@ export class PopUp extends BaseElement {
       (_, idxPoint) =>
         new BaseElement('div', [styles.superpowersSnowflakeBlock]),
     );
-    // this.superpowersLeft = new BaseElement('ul', [styles.superpowersList]);
-    // this.superpowersLeftItem = Array.from(
-    //   {
-    //     length: Object.keys(currentJSONCard.superpowers).length,
-    //   },
-    //   (_, idxSuperpowers) =>
-    //     new BaseElement(
-    //       'li',
-    //       [styles.superpowersItem],
-    //       {},
-    //       Object.keys(currentJSONCard.superpowers)[idxSuperpowers],
-    //     ),
-    // );
-    // this.superpowersRight = new BaseElement('ul', [styles.superpowersRight]);
-    // this.superpowersRightItem = Array.from(
-    //   {
-    //     length: Object.keys(currentJSONCard.superpowers).length,
-    //   },
-    //   () => new BaseElement('li', [styles.superpowersRightItem]),
-    // );
-
-    // this.superpowersPoint = Array.from(
-    //   {
-    //     length: Object.keys(currentJSONCard.superpowers).length,
-    //   },
-    //   (_, idxPoints) =>
-    //     new BaseElement(
-    //       'span',
-    //       [styles.superpowersPoint],
-    //       {},
-    //       Object.values(currentJSONCard.superpowers)[idxPoints],
-    //     ),
-    // );
-
-    // this.superpowersLeft.append(...this.superpowersLeftItem);
-    // this.superpowersRightItem.forEach((li) =>
-    //   li.append(...this.superpowersPoint),
-    // );
-    // this.superpowersRight.append(...this.superpowersRightItem);
-    // this.superpowersBottom.append(this.superpowersLeft, this.superpowersRight);
-
-    // this.innerSnowflake(data);
-    // const snowflakePoints = Array.from(
-    //   {
-    //     length: Object.keys(currentJSONCard.superpowers).length,
-    //   },
-    //   () =>
-    //     Array.from({ length: this.maxPoint }, () => {
-    //       new BaseElement('img', [styles.snowflakeImg], {
-    //         src: this.snowflakePoint.active,
-    //       });
-    //     }),
-    // );
-    // console.log(snowflakePoints);
-    // this.superpowersPoint.forEach((div, idx) =>
-    //   div.append(this.innerSnowflake(data)[idx]),
-    // );
 
     this.superpowersPoint.forEach((div, idx) =>
       div.append(this.superpowersSnowflakeBlock[idx]),
     );
 
-    console.log(this.innerSnowflake(data));
-    console.log(this.superpowersSnowflakeBlock);
     this.superpowersSnowflakeBlock.forEach((div, idx) =>
       div.append(...this.innerSnowflake(data)[idx]),
     );
     this.superpowersItem.forEach((item, idx) =>
-      item.append(
-        this.superpowersItemName[idx],
-        this.superpowersPoint[idx],
-        // snowflakePoints[idx],
-      ),
+      item.append(this.superpowersItemName[idx], this.superpowersPoint[idx]),
     );
     this.superpowersBottom.append(...this.superpowersItem);
     this.superpowers.append(this.superpowersHeader, this.superpowersBottom);
@@ -256,8 +188,8 @@ export class PopUp extends BaseElement {
     this.giftDescription.append(this.descriptionText, this.superpowers);
     this.descriptionText.append(this.tag, this.name, this.description);
     this.modalPicture.append(...this.modalSources, this.modalImg);
-    this.append(this.modalPicture, this.giftDescription);
-    // this.innerSnowflake(data);
+    this.append(this.modalPicture, this.giftDescription, this.buttonClose);
+    this.closeFromButton(this.buttonClose);
   }
 
   innerSnowflake(data) {
@@ -279,18 +211,10 @@ export class PopUp extends BaseElement {
           return new BaseElement('img', [styles.snowflakeImg], {
             src: this.snowflakePoint.notActive,
           });
-          // return pointArray[idxSnowFlakeArray];
         });
       },
     );
 
-    // const snowflakeImgPoints = Array.from({ length: this.maxPoint }, (_, idx) => {
-    //   if (idx < )
-
-    // });
-
-    // console.log(snowflakePointsList);
     return snowflakePointsList;
-    // console.log(pointArray);
   }
 }
