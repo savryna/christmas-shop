@@ -184,7 +184,7 @@ export class Slider extends BaseElement {
     //   this.currentVW - this.countWidthPadding(),
     // );
     this.visible =
-      window.clientWidth > this.maxContentWidth
+      document.documentElement.clientWidth > this.maxContentWidth
         ? this.currentVW - this.countWidthPadding()
         : this.currentVW - this.countWidthPadding() - this.getScrollbarWidth();
     this.currentVW - this.countWidthPadding() - this.getScrollbarWidth();
