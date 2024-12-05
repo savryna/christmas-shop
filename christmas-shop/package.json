@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist -e christmas-shop",
+    "NOT-deploy": "npm run build && gh-pages -d dist -e christmas-shop",
     "format": "prettier --write .",
     "stylelint": "stylelint **/*.css **/*.scss"
   },

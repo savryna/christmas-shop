@@ -18,7 +18,7 @@ export class Main2Page extends BaseElement {
 
   addButtonUp() {
     window.addEventListener('scroll', () => {
-      const buttonVisibilityHeight = 300;
+      const buttonVisibilityHeight = 301;
 
       this.buttonUp.controlClass(
         stylesButton.visible,
