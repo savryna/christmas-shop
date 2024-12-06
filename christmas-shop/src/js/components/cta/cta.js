@@ -2,12 +2,16 @@ import { BaseElement } from '../../common/baseElem.js';
 import styles from './cta.module.scss';
 
 export class CTASection extends BaseElement {
-  timer = [
-    { days: '47' },
-    { hours: '5' },
-    { minutes: '34' },
-    { seconds: '12' },
-  ];
+  timerVariables = {
+    days: '47',
+    hours: '5',
+    minutes: '34',
+    seconds: '12',
+  };
+
+  #deadlineUTC = '2025-01-01T00:00:00.000Z';
+
+  #deadlineWord = 'Happy New Year!';
 
   constructor() {
     super('section', [styles.ctaSection]);
@@ -35,9 +39,9 @@ export class CTASection extends BaseElement {
       'The New Year is Coming Soon...',
     );
 
-    const timerBlock = new BaseElement('ul', [styles.timerBlock]);
+    this.timerBlock = new BaseElement('ul', [styles.timerBlock]);
     const timerItems = Array.from(
-      { length: this.timer.length },
+      { length: Object.keys(this.timerVariables).length },
       (_, idx) => new BaseElement('li', [styles.timerItem]),
     );
 
@@ -53,13 +57,13 @@ export class CTASection extends BaseElement {
     );
 
     const timerWord = Array.from(
-      { length: this.timer.length },
+      { length: Object.keys(this.timerVariables).length },
       (_, idx) =>
         new BaseElement(
           'p',
           [styles.timerWord],
           {},
-          Object.keys(this.timer[idx]),
+          Object.keys(this.timerVariables)[idx],
         ),
     );
     this.timerWord = timerWord;
@@ -67,18 +71,18 @@ export class CTASection extends BaseElement {
     timerItems.forEach((li, idx) =>
       li.append(this.timerNumber[idx], timerWord[idx]),
     );
-    timerBlock.append(...timerItems);
-    ctaContent.append(question, toGiftsPage, timerText, timerBlock);
+    this.timerBlock.append(...timerItems);
+    ctaContent.append(question, toGiftsPage, timerText, this.timerBlock);
     this.append(ctaContent);
     this.drawTimer();
   }
 
   countParameters() {
-    const deadlineUTC = '2025-01-01T00:00:00.000Z';
     const currentTimeUTC = new Date().toISOString();
 
-    const deltaTime = Date.parse(deadlineUTC) - Date.parse(currentTimeUTC);
-    const remainTime = deltaTime < 0 ? 0 : deltaTime;
+    const deltaTime =
+      Date.parse(this.#deadlineUTC) - Date.parse(currentTimeUTC);
+    const remainTime = deltaTime <= 0 ? this.changeEventTimer() : deltaTime;
     const remainSeconds = Math.floor((remainTime / 1000) % 60);
     const remainMinutes = Math.floor((remainTime / 1000 / 60) % 60);
     const remainHours = Math.floor((remainTime / 1000 / 60 / 60) % 24);
@@ -93,19 +97,24 @@ export class CTASection extends BaseElement {
   }
 
   drawTimer() {
-    const timeInterval = setInterval(() => {
+    setInterval(() => {
       const timerBlockInner = Object.values(this.countParameters());
       this.timerNumber.forEach((timerBlock, idx) =>
-        timerBlock.innerHTML(timerBlockInner[idx + 1]),
+        timerBlock.setInnerHTML(timerBlockInner[idx + 1]),
       );
     }, 1000);
-    this.stopTimer(this.remainTime, timeInterval);
   }
 
-  stopTimer(remainTime, timeInterval) {
-    if (remainTime <= 0) {
-      clearInterval(timeInterval);
-      this.drawTimer();
-    }
+  changeEventTimer() {
+    this.#deadlineUTC = this.#deadlineUTC
+      .split('-')
+      .map((parametr, idx) => {
+        if (idx === 0) {
+          return Number(parametr) + 1;
+        }
+        return parametr;
+      })
+      .join('-');
+    this.countParameters();
   }
 }

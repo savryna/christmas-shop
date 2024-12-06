@@ -16,7 +16,6 @@ p {
       url('../../../img/bg-ball.webp') type('image/webp'),
       url('../../../img/bg-ball.png') type('image/png')
     );
-
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -35,10 +34,6 @@ p {
   gap: 12px;
   max-width: 430px;
   text-align: center;
-
-  @media screen and (width <= 460px) {
-    // padding: 0 8px;
-  }
 }
 
 .congratulationTop,

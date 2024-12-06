@@ -2,10 +2,10 @@
 @use '../../../styles/_variables.scss' as *;
 
 .giftsSection {
-  @include snowBack;
-
   padding: 59.1px 0 59px;
   color: $static-white;
+
+  @include snowBack;
 
   @media screen and (width <= 768px) {
     & {

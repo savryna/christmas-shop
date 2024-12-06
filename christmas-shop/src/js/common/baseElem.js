@@ -14,13 +14,16 @@ export class BaseElement extends Helper {
     this._elem.classList.add(...cssClasses);
   }
 
-  innerHTML(innerContent) {
+  setInnerHTML(innerContent) {
     this._elem.innerHTML = innerContent;
+  }
+
+  getInnerHTML() {
+    return this._elem.innerHTML;
   }
 
   removeAttributes(attributes) {
     attributes.forEach((atr) => this._elem.removeAttribute(atr));
-    // this._elem.removeAttribute(...attributes);
   }
 
   append(...children) {
@@ -47,8 +50,16 @@ export class BaseElement extends Helper {
     );
   }
 
+  getAttribute(atr) {
+    return this._elem.getAttribute(atr);
+  }
+
   remove() {
     this._elem.remove();
+  }
+
+  removeChildren() {
+    this._elem.innerHTML = '';
   }
 
   controlClass(style, option) {
@@ -61,5 +72,9 @@ export class BaseElement extends Helper {
 
   addEventListener(event, callback) {
     this._elem.addEventListener(event, callback);
+  }
+
+  getInnerText() {
+    return this._elem.innerText;
   }
 }

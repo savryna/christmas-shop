@@ -9,21 +9,10 @@ export class Main2Page extends BaseElement {
     super('main', [styles.main]);
 
     const giftCards = new GiftCards();
-    this.button = new ButtonUp();
+    this.buttonUp = new ButtonUp();
 
-    this.append(giftCards, this.button);
+    this.append(giftCards, this.buttonUp);
 
-    this.addButtonUp();
-  }
-
-  addButtonUp() {
-    window.addEventListener('scroll', () => {
-      const buttonVisibilityHeight = 300;
-
-      this.button.controlClass(
-        stylesButton.visible,
-        window.pageYOffset >= buttonVisibilityHeight,
-      );
-    });
+    this.buttonUp.addButtonUp();
   }
 }

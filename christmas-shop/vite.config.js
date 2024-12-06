@@ -21,13 +21,8 @@ export default defineConfig({
         gifts: resolve(__dirname, 'gifts.html'),
       },
     },
+    scss: {
+      api: 'modern-compiler',
+    },
   },
 });
-
-// rollupOptions: {
-//   input: {
-//     main: resolve(_dirname, 'index.html'),
-//     home: resolve(_dirname, 'home.html'),
-//     menu: resolve(_dirname, 'menu.html'),
-//   },
-// },

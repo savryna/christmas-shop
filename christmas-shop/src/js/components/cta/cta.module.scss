@@ -3,7 +3,6 @@
 
 .ctaSection {
   padding: 60px 7px;
-  // background: url('../../../img/bg-snow.png'), url('../../../img/bg-forest.png');
   background: image-set(
       url('../../../img/bg-snow.avif') type('image/avif'),
       url('../../../img/bg-snow.webp') type('image/webp'),
@@ -14,8 +13,6 @@
       url('../../../img/bg-forest.webp') type('image/webp'),
       url('../../../img/bg-forest.png') type('image/png')
     );
-  // background-size: contain;
-  // background-repeat: no-repeat;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center bottom 0;
@@ -53,7 +50,6 @@
 
 .timerBlock {
   margin-top: -11px;
-  // padding: 8px 12px 12px;
   width: 344px;
   height: 73px;
   display: flex;
@@ -90,4 +86,8 @@
 
 .timerWord {
   @include mixins.header4;
+}
+
+p.timerText {
+  font-size: 30px;
 }
