@@ -3,7 +3,7 @@ import styles from './card.module.scss';
 import data from '../../data/gifts.json';
 
 export class Card extends BaseElement {
-  cardsContent = [
+  #cardsContent = [
     {
       src: './img/gift-for-work',
       category: 'For Work',
@@ -17,29 +17,19 @@ export class Card extends BaseElement {
       category: 'For Harmony',
     },
   ];
-  cardsCategory = ['For Work', 'For Health', 'For Harmony'];
   imgExtension = ['avif', 'webp', 'png'];
 
   constructor() {
     super('article', [styles.card]);
-
-    // this.createCard();
   }
 
-  // getRandomData() {
-  //   const randomCard = this.getRandomElem(data);
-  //   const indexCardFromData = data.indexOf(randomCard);
-  //   return randomCard;
-  // }
-
-  findSrcToCard(cardFromRandom) {
-    return this.cardsContent.find(
-      (card) => card.category === cardFromRandom.category,
+  findSrcToCard(cardFromData) {
+    return this.#cardsContent.find(
+      (card) => card.category === cardFromData.category,
     );
   }
 
   getDataForCard(dataForCard) {
-    // const currentCard = this.getRandomData();
     const currentCard = dataForCard;
 
     const cardsSrcFromCategory = this.findSrcToCard(currentCard);
@@ -48,7 +38,6 @@ export class Card extends BaseElement {
     const cssStyle = `${category.split(' ')[0].toLowerCase()}${category.split(' ')[1][0].toUpperCase() + category.split(' ')[1].slice(1)}`;
     const cardHeader = currentCard.name;
     const cardDescription = currentCard.description;
-    // console.log(cardDescription);
     return {
       src: src,
       category: category,
@@ -59,10 +48,8 @@ export class Card extends BaseElement {
   }
 
   createCard(dataForCard) {
-    // const data = this.getDataForCard();
     const data = this.getDataForCard(dataForCard);
-
-    // this.card = new BaseElement('article', [styles.card]);
+    this.data = data;
     this.cardPicture = new BaseElement('picture', [styles.cardPicture]);
     this.cardImg = new BaseElement('img', [styles.cardImg], {
       src: `${data.src}.png`,
@@ -92,10 +79,64 @@ export class Card extends BaseElement {
       data.cardHeader,
     );
     this.cardDescription = data.cardDescription;
+    this.category = data.category;
 
     this.cardText.append(this.cardTag, this.cardHeader);
     this.cardPicture.append(...this.cardSources, this.cardImg);
     this.append(this.cardPicture, this.cardText);
     return this;
+  }
+
+  getRandomData() {
+    const giftCardAmounts = 4;
+    const setIdxs = new Set();
+    while (setIdxs.size < giftCardAmounts) {
+      const randomCard = data.indexOf(this.getRandomElem(data));
+      setIdxs.add(randomCard);
+    }
+    return setIdxs;
+  }
+
+  createInstanceCard() {
+    return new Card();
+  }
+
+  createRandomCard(cardAmount) {
+    const arrCard = [];
+    this.ArrayFromSet = Array.from(this.getRandomData());
+
+    for (let i = 0; i < cardAmount; i++) {
+      this.curCard = this.createInstanceCard();
+
+      this.cardJSON = data[this.ArrayFromSet[i]];
+      arrCard.push(this.curCard.createCard(this.cardJSON));
+    }
+    return arrCard;
+  }
+
+  createJSONCard() {
+    const arrCard = [];
+
+    const cardAmount = data.length;
+
+    for (let i = 0; i < cardAmount; i++) {
+      this.curCard = this.createInstanceCard();
+      this.cardJSON = data[i];
+      arrCard.push(this.curCard.createCard(this.cardJSON));
+    }
+    return arrCard;
+  }
+
+  filterGiftCards(filterButton) {
+    if (filterButton.innerText.toLowerCase() === 'all') {
+      return this.createJSONCard();
+    }
+    const filterCards = this.createJSONCard().filter(
+      (card) =>
+        card.cardTag.getInnerText().toLowerCase() ===
+        filterButton.innerText.toLowerCase(),
+    );
+
+    return filterCards;
   }
 }

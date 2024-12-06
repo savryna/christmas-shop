@@ -214,6 +214,3 @@ export class Footer extends BaseElement {
     );
   }
 }
-
-{
-}

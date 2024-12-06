@@ -36,19 +36,6 @@ export class ButtonUp extends BaseElement {
   </svg>
       `,
     );
-
-    // this.imgArrow = new BaseElement(
-    //   'svg',
-    //   [],
-    //   {
-    //     // src: './img/svg/arrow-up.svg',
-    //   },
-    //   `
-
-    // `,
-    // );
-
-    // this.append(this.imgArrow);
     this.addEventListener('click', () => this.returnTop());
   }
 
@@ -56,6 +43,17 @@ export class ButtonUp extends BaseElement {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
+    });
+  }
+
+  addButtonUp() {
+    window.addEventListener('scroll', () => {
+      const buttonVisibilityHeight = 301;
+
+      this.controlClass(
+        styles.visible,
+        window.pageYOffset > buttonVisibilityHeight,
+      );
     });
   }
 }

@@ -2,20 +2,14 @@ import { BaseElement } from '../../common/baseElem.js';
 import styles from './slider.module.scss';
 
 export class Slider extends BaseElement {
-  sliderSrc = [
-    './img/snowman.png',
-    './img/christmas-trees.png',
-    './img/christmas-tree-ball.png',
-    './img/fairytale-house.png',
-  ];
-  sliderSrcPath = [
+  #sliderSrcPath = [
     './img/snowman',
     './img/christmas-trees',
     './img/christmas-tree-ball',
     './img/fairytale-house',
   ];
-  sliderText = ['live', 'create', 'love', 'dream'];
-  sliderAlts = [
+  #sliderText = ['live', 'create', 'love', 'dream'];
+  #sliderAlts = [
     'snowman image',
     'christmas trees image',
     'christmas tree ball image',
@@ -23,7 +17,17 @@ export class Slider extends BaseElement {
   ];
   imgExtension = ['avif', 'webp', 'png'];
 
-  moveIndex = 0;
+  #sliderVariables = {
+    middleVW: 768,
+    maxVW: 1440,
+    minPadding: 8,
+    maxPadding: 82,
+    widthContents: 1993,
+    clickLargeScreen: 3,
+    clickSmallScreen: 6,
+  };
+
+  #moveIndex = 0;
 
   constructor() {
     super('section', [styles.sliderSection]);
@@ -35,39 +39,38 @@ export class Slider extends BaseElement {
       'Become Happier!',
     );
     const gratitudeBottom = new BaseElement(
-      'div',
+      'p',
       [styles.gratitudeBottom],
       {},
-      '<span>in the new 2025</span>',
+      'in the new 2025',
     );
 
-    const sliderContainer = new BaseElement('div', [styles.sliderContainer]);
+    this.sliderContainer = new BaseElement('div', [styles.sliderContainer]);
     this.sliderItems = new BaseElement('div', [styles.sliderItems]);
-    // this.sliderItems = sliderItems;
 
     const imgElems = Array.from(
-      { length: this.sliderSrc.length },
+      { length: this.#sliderSrcPath.length },
       (_, idx) =>
         new BaseElement('img', [styles.sliderImgs], {
-          src: this.sliderSrc[idx],
-          alt: this.sliderAlts[idx],
+          src: `${this.#sliderSrcPath[idx]}.png`,
+          alt: this.#sliderAlts[idx],
           loading: 'lazy',
         }),
     );
 
     const pictureElems = Array.from(
-      { length: this.sliderSrc.length },
+      { length: this.#sliderSrcPath.length },
       () => new BaseElement('picture'),
     );
     const sourceElems = Array.from(
-      { length: this.sliderSrc.length },
+      { length: this.#sliderSrcPath.length },
       (_, idxSources) =>
         Array.from(
           { length: this.imgExtension.length },
           (_, idxSource) =>
             new BaseElement('source', [], {
               type: `image/${this.imgExtension[idxSource]}`,
-              srcset: `${this.sliderSrcPath[idxSources]}.${this.imgExtension[idxSource]}`,
+              srcset: `${this.#sliderSrcPath[idxSources]}.${this.imgExtension[idxSource]}`,
             }),
         ),
     );
@@ -76,14 +79,14 @@ export class Slider extends BaseElement {
     );
 
     const textElems = Array.from(
-      { length: this.sliderText.length },
+      { length: this.#sliderText.length },
       (_, idx) =>
-        new BaseElement('p', [styles.sliderText], {}, this.sliderText[idx]),
+        new BaseElement('p', [styles.sliderText], {}, this.#sliderText[idx]),
     );
 
     const sliderArray = Array.from(
       {
-        length: this.sliderSrc.length + this.sliderText.length,
+        length: this.#sliderSrcPath.length + this.#sliderText.length,
       },
       (_, idx) => {
         if (idx % 2) {
@@ -95,7 +98,7 @@ export class Slider extends BaseElement {
 
     const sliderControls = new BaseElement('div', [styles.sliderControls]);
 
-    const arrowRight = new BaseElement(
+    this.arrowRight = new BaseElement(
       'button',
       [styles.sliderButton],
       {},
@@ -114,9 +117,8 @@ export class Slider extends BaseElement {
       />
     </svg>`,
     );
-    this.arrowRight = arrowRight;
 
-    const arrowLeft = new BaseElement(
+    this.arrowLeft = new BaseElement(
       'button',
       [styles.sliderButton],
       { disabled: 'disabled' },
@@ -136,12 +138,11 @@ export class Slider extends BaseElement {
       </svg>
       `,
     );
-    this.arrowLeft = arrowLeft;
 
-    sliderControls.append(arrowLeft, arrowRight);
     this.sliderItems.append(...sliderArray);
-    sliderContainer.append(this.sliderItems, sliderControls);
-    this.append(gratitude, gratitudeBottom, sliderContainer);
+    sliderControls.append(this.arrowLeft, this.arrowRight);
+    this.sliderContainer.append(this.sliderItems, sliderControls);
+    this.append(gratitude, gratitudeBottom, this.sliderContainer);
 
     this.moveSliderStart();
     this.countVariables();
@@ -149,42 +150,41 @@ export class Slider extends BaseElement {
     this.arrowRight.addEventListener('click', () => this.moveRight());
   }
 
-  // clamp (min, interpolation, max)
-
-  // clamp(8px, 8px + 74*(100vw - 768px) / 672, 82px);
   countWidthPadding() {
-    const minVW = 380;
-    const middleVW = 768;
-    const maxVW = 1440;
-    const minPadding = 8;
-    const maxPadding = 82;
-    const currentVW = Math.min(window.innerWidth, 1440);
-    const linearInterpolation =
-      minPadding +
-      ((maxPadding - minPadding) * (currentVW - middleVW)) / (maxVW - middleVW);
-    let resPadding = Math.max(
-      minPadding,
-      Math.min(linearInterpolation, maxPadding),
+    const currentVW = Math.min(
+      document.documentElement.clientWidth,
+      this.#sliderVariables.maxVW,
     );
-    // if (minPadding < linearInterpolation) {
-    //   resPadding = minPadding
-    // } else if ()
 
-    console.log(minPadding, resPadding, maxPadding);
+    const linearInterpolation =
+      this.#sliderVariables.minPadding +
+      ((this.#sliderVariables.maxPadding - this.#sliderVariables.minPadding) *
+        (currentVW - this.#sliderVariables.middleVW)) /
+        (this.#sliderVariables.maxVW - this.#sliderVariables.middleVW);
+    let resPadding = Math.max(
+      this.#sliderVariables.minPadding,
+      Math.min(linearInterpolation, this.#sliderVariables.maxPadding),
+    );
     return resPadding;
   }
 
   countVariables() {
-    this.widthSlider = 1993 + this.countWidthPadding();
-    this.currentVW = Math.min(window.innerWidth, 1440);
-    this.brakePointOfClick = 768;
-    this.visible = this.currentVW - this.countWidthPadding();
-    this.numberOfClick = this.currentVW > this.brakePointOfClick ? 3 : 6;
+    this.widthSlider =
+      this.#sliderVariables.widthContents + this.countWidthPadding();
+    this.currentVW = Math.min(window.innerWidth, this.#sliderVariables.maxVW);
+    this.visible =
+      document.documentElement.clientWidth > this.#sliderVariables.maxVW
+        ? this.currentVW - this.countWidthPadding()
+        : this.currentVW - this.countWidthPadding() - this.getScrollbarWidth();
+    this.currentVW - this.countWidthPadding() - this.getScrollbarWidth();
+    this.numberOfClick =
+      this.currentVW > this.#sliderVariables.middleVW
+        ? this.#sliderVariables.clickLargeScreen
+        : this.#sliderVariables.clickSmallScreen;
     this.widthMove = (this.widthSlider - this.visible) / this.numberOfClick;
     return [
       this.widthSlider,
       this.currentVW,
-      this.brakePointOfClick,
       this.visible,
       this.numberOfClick,
       this.widthMove,
@@ -193,35 +193,41 @@ export class Slider extends BaseElement {
 
   moveSliderStart() {
     window.addEventListener('resize', () => {
+      this.#moveIndex = 0;
       this.countVariables();
       this.checkDisabledButton();
-      this.moveIndex = 0;
-      this.numberOfClick = this.currentVW > this.brakePointOfClick ? 3 : 6;
-      this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
+      this.numberOfClick =
+        this.currentVW > this.#sliderVariables.middleVW
+          ? this.#sliderVariables.clickLargeScreen
+          : this.#sliderVariables.clickSmallScreen;
+      this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.#moveIndex}px)`;
     });
   }
 
   moveRight() {
-    this.moveIndex += 1;
-    this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
+    this.#moveIndex += 1;
+    this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.#moveIndex}px)`;
 
     this.checkDisabledButton();
   }
 
   moveLeft() {
-    this.moveIndex -= 1;
-    this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.moveIndex}px)`;
+    this.#moveIndex -= 1;
+    this.sliderItems._elem.style.transform = `translateX(-${this.widthMove * this.#moveIndex}px)`;
+
     this.checkDisabledButton();
   }
 
   checkDisabledButton() {
-    if (this.moveIndex >= 1) {
+    if (this.#moveIndex >= 1) {
       this.arrowLeft.removeAttributes(['disabled']);
+      this.arrowRight.removeAttributes(['disabled']);
     }
-    if (this.moveIndex >= this.numberOfClick) {
+    if (this.#moveIndex >= this.numberOfClick) {
       this.arrowRight.setAttributes({ disabled: 'disabled' });
     }
-    if (this.moveIndex <= 0) {
+
+    if (this.#moveIndex <= 0) {
       this.arrowRight.removeAttributes(['disabled']);
       this.arrowLeft.setAttributes({ disabled: 'disabled' });
     }

@@ -6,17 +6,10 @@
   background-color: variables.$static-white;
   display: flex;
   justify-content: space-between;
-  padding: 9.4px 82px;
-
-  @media screen and (width < 1440px) {
-    & {
-      padding: 9.4px 5.69vw;
-    }
-  }
+  padding: 9.4px variables.$padding;
 
   @media screen and (width <= 768px) {
     & {
-      padding: 9.4px 8px;
       position: relative;
       z-index: 1;
     }
@@ -52,12 +45,10 @@
 .nav {
   @media screen and (width <= 768px) {
     position: fixed;
-    // top: 64px;
     z-index: -1;
     height: 100dvh;
     background-color: variables.$static-white;
     width: 100%;
-    // height: calc(100dvh - 64px);
     transition: all 0.3s ease-in;
     right: -100%;
     opacity: 0;
@@ -95,19 +86,17 @@
 
   .navLink {
     cursor: pointer;
-    // padding: 12px 20.4px;
-    // transition: all 0.3s ease;
+
+    span {
+      padding: 12px 20.4px;
+      transition: all 0.3s ease-in-out;
+    }
 
     &.active span {
       color: variables.$primary;
       background-color: variables.$primary10;
       border-radius: 12px;
       cursor: default;
-    }
-
-    span {
-      padding: 12px 20.4px;
-      transition: all 0.3s ease-in-out;
     }
   }
 
@@ -126,7 +115,6 @@
     @include mixins.action_large;
 
     display: flex;
-    width: 100%;
     justify-content: center;
     position: relative;
 
@@ -152,7 +140,6 @@
 
 .burgerButton {
   display: none;
-  position: relative;
   width: 40px;
   height: 40px;
   transition: all 0.3s ease;
@@ -169,6 +156,7 @@
     position: absolute;
     top: 26px;
   }
+
   &::before {
     content: '';
     width: 20px;
@@ -179,8 +167,6 @@
     position: absolute;
     top: 19px;
   }
-
-  // &.active {
 
   @media screen and (width <= 768px) {
     display: flex;
@@ -194,6 +180,7 @@
   &::before {
     transform: rotate(135deg) translate(2px, -3px);
   }
+
   &::after {
     transform: rotate(225deg) translate(2px, 3px);
   }

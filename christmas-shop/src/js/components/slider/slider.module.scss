@@ -2,9 +2,9 @@
 @use '../../../styles/mixins.scss';
 
 .sliderSection {
-  @include mixins.snowBack;
-
   padding: 60px 0;
+
+  @include mixins.snowBack;
 }
 
 .gratitude {
@@ -16,6 +16,7 @@
 
 .gratitudeBottom {
   @include mixins.header2;
+
   color: variables.$static-white;
   margin-left: 4px;
   margin-bottom: 19px;
@@ -26,24 +27,12 @@
 }
 
 .sliderItems {
-  padding-left: 82px;
-  padding-left: clamp(
-    8px,
-    8px + (82 - 8) * ((100vw - 768px) / (1440 - 768)),
-    82px
-  );
+  padding-left: variables.$padding;
   display: flex;
   gap: 20px;
   align-items: center;
   margin-bottom: 16.2px;
-  transition: transform 0.3s ease-in;
-
-  // @media screen and (width <= 1440px) {
-  //   padding-left: 5.69vw;
-  // }
-  // @media screen and (width <= 768px) {
-  //   padding-left: 8px;
-  // }
+  transition: transform 0.5s ease-in;
 }
 
 .sliderImgs {
@@ -51,30 +40,23 @@
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 20px;
+  user-select: none;
+  pointer-events: none;
 }
 
 .sliderText {
   @include mixins.slider;
 
   color: variables.$static-white;
+  user-select: none;
+  pointer-events: none;
 }
 
 .sliderControls {
   display: flex;
   gap: 20px;
-  padding: 0 82px;
+  padding: 0 variables.$padding;
   justify-content: flex-end;
-
-  @media screen and (width <= 1440px) {
-    & {
-      padding: 0 5.69vw;
-    }
-  }
-  @media screen and (width <= 768px) {
-    & {
-      padding: 0 8px;
-    }
-  }
 }
 
 .sliderButton {
