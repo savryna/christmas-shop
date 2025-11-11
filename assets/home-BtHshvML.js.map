@@ -1,0 +1,1 @@
+{"version":3,"file":"home-BtHshvML.js","sources":["../../src/js/home.js"],"sourcesContent":["import { Root } from './components/wrapper/wrapper.js';\n\nconst root = new Root();\nroot.init();\n"],"names":[],"mappings":";;AAEA,MAAM,IAAI,GAAG,IAAI,IAAI,EAAE,CAAC;AACxB,IAAI,CAAC,IAAI,EAAE"}

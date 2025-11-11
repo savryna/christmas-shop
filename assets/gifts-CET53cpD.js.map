@@ -1,0 +1,1 @@
+{"version":3,"file":"gifts-CET53cpD.js","sources":["../../src/js/gift.js"],"sourcesContent":["import { RootGifts } from './components/wrapper/wrapper.js';\n\nconst root = new RootGifts();\nroot.init();\n"],"names":[],"mappings":";;AAEA,MAAM,IAAI,GAAG,IAAI,SAAS,EAAE,CAAC;AAC7B,IAAI,CAAC,IAAI,EAAE"}
